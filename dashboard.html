@@ -38,39 +38,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.1.0/firebase-auth.min.js"></script>
 
     <script>
-        
-        // Firebase Configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyBls-s1CGz5gaE8Dy_uc1aGcVi7nvvr7WI",
-            authDomain: "fitness-soul-454717.firebaseapp.com",
-            projectId: "fitness-soul-454717",
-            storageBucket: "fitness-soul-454717.appspot.com",
-            messagingSenderId: "631085760200",
-            appId: "1:631085760200:web:6310857602000000000000"
-        };
+      import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
 
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        console.log("Firebase Initialized:", firebase);
-console.log("Firebase Auth Instance:", firebase.auth());
+const auth = getAuth();
+const db = getFirestore();
 
+onAuthStateChanged(auth, async (user) => {
+    if (user) {
+        const userRef = doc(db, "users", user.uid);
+        const userDoc = await getDoc(userRef);
 
-        // Logout Button Functionality
-        document.getElementById('logout').addEventListener('click', () => {
-            auth.signOut().then(() => {
-                window.location.href = "index.html";  // Redirect to Home Page
-            }).catch((error) => {
-                console.error("Logout Error:", error);
-            });
-        });
+        if (userDoc.exists()) {
+            const data = userDoc.data();
+            document.getElementById("user-age").textContent = data.age;
+            document.getElementById("user-height").textContent = data.height;
+            document.getElementById("user-weight").textContent = data.weight;
+            document.getElementById("user-purpose").textContent = data.exercisePurpose;
+            document.getElementById("user-injury").textContent = data.injury || "None";
+            document.getElementById("user-diet").textContent = data.diet;
+        }
+    } else {
+        window.location.href = "/index.html"; // Redirect if not signed in
+    }
+});
 
-        // Redirect If Not Logged In
-        auth.onAuthStateChanged((user) => {
-            if (!user) {
-                window.location.href = "index.html"; // Redirect if not logged in
-            }
-        });
     </script>
 </body>
 </html>

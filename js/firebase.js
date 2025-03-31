@@ -1,8 +1,21 @@
 // Import Firebase Modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
-// Firebase Configuration (Yes, it includes your API Key)
+import { 
+    getAuth, 
+    signInWithEmailAndPassword, 
+    createUserWithEmailAndPassword, 
+    GoogleAuthProvider, 
+    signInWithPopup, 
+    onAuthStateChanged 
+} from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+import { 
+    getFirestore, 
+    doc, 
+    setDoc, 
+    getDoc 
+} from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+
+// Firebase Configuration
 const firebaseConfig = {
     apiKey: "AIzaSyBls-s1CGz5gaE8Dy_uc1aGcVi7nvvr7WI",
     authDomain: "fitness-soul-454717.firebaseapp.com",
@@ -32,6 +45,7 @@ document.querySelectorAll('.tab').forEach(tab => {
         }
     });
 });
+
 // Function to Save User Info in Firestore
 const saveUserInfo = async (userId, fullName, email) => {
     await setDoc(doc(db, "users", userId), {
@@ -45,26 +59,41 @@ const saveUserInfo = async (userId, fullName, email) => {
         diet: null
     });
 };
+
 // Sign In Function
-document.getElementById('form-signin').addEventListener('submit', (e) => {
+document.getElementById('form-signin').addEventListener('submit', async (e) => {
     e.preventDefault();
+    
     const email = document.getElementById('signin-email').value;
     const password = document.getElementById('signin-password').value;
 
-    signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            console.log("User signed in:", userCredential.user);
-            window.location.href = "/dashboard";
-        })
-        .catch((error) => {
-            document.getElementById('signin-error').textContent = error.message;
-            document.getElementById('signin-error').style.display = 'block';
-        });
-});
+    console.log("Attempting sign in with:", email);
 
+    try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        console.log("User signed in successfully:", userCredential.user);
+
+        // Check if user has filled the info form
+        const userRef = doc(db, "users", userCredential.user.uid);
+        const userDoc = await getDoc(userRef);
+
+        if (userDoc.exists() && userDoc.data().age !== null) {
+            console.log("User data exists, redirecting to dashboard.");
+            window.location.href = "dashboard.html";
+        } else {
+            console.log("User needs to fill additional info, redirecting.");
+            window.location.href = "user-info.html";
+        }
+    } catch (error) {
+        console.error("Error signing in:", error.message);
+        document.getElementById('signin-error').textContent = error.message;
+        document.getElementById('signin-error').style.display = 'block';
+    }
+});
 // Sign Up Function
 document.getElementById('form-signup').addEventListener('submit', (e) => {
     e.preventDefault();
+    const fullName = document.getElementById('signup-name').value;
     const email = document.getElementById('signup-email').value;
     const password = document.getElementById('signup-password').value;
     const confirmPassword = document.getElementById('signup-confirm-password').value;
@@ -76,13 +105,10 @@ document.getElementById('form-signup').addEventListener('submit', (e) => {
     }
 
     createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
+        .then(async (userCredential) => {
             console.log("User signed up:", userCredential.user);
-            document.getElementById('signup-success').textContent = "Account created successfully! Please sign in.";
-            document.getElementById('signup-success').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('tab-signin').click();
-            }, 2000);
+            await saveUserInfo(userCredential.user.uid, fullName, email);
+            window.location.href = "/user-info.html"; // Redirect to user info form
         })
         .catch((error) => {
             document.getElementById('signup-error').textContent = error.message;
@@ -93,9 +119,14 @@ document.getElementById('form-signup').addEventListener('submit', (e) => {
 // Google Sign-In Function
 const googleSignIn = () => {
     signInWithPopup(auth, provider)
-        .then((result) => {
+        .then(async (result) => {
             console.log("Google Sign In successful:", result.user);
-            window.location.href = "/dashboard";
+            const userDoc = await getDoc(doc(db, "users", result.user.uid));
+
+            if (!userDoc.exists()) {
+                await saveUserInfo(result.user.uid, result.user.displayName, result.user.email);
+            }
+            checkUserProfile(result.user.uid);
         })
         .catch((error) => {
             console.error("Google Sign In error:", error);
@@ -107,14 +138,19 @@ const googleSignIn = () => {
 document.getElementById('google-signin').addEventListener('click', googleSignIn);
 document.getElementById('google-signup').addEventListener('click', googleSignIn);
 
+// Function to Check User Profile Completion
+const checkUserProfile = async (userId) => {
+    const userDoc = await getDoc(doc(db, "users", userId));
+    if (userDoc.exists() && userDoc.data().age !== null) {
+        window.location.href = "/dashboard.html"; // Redirect if profile is complete
+    } else {
+        window.location.href = "/user-info.html"; // Redirect to user info form
+    }
+};
+
 // Check Authentication State
 onAuthStateChanged(auth, async (user) => {
     if (user) {
-        const userDoc = await getDoc(doc(db, "users", user.uid));
-        if (userDoc.exists() && userDoc.data().age !== null) {
-            window.location.href = "/dashboard.html";
-        } else {
-            window.location.href = "/user-info.html";
-        }
+        checkUserProfile(user.uid);
     }
 });

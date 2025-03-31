@@ -45,42 +45,22 @@
     <div class="form-container">
         <h2>Complete Your Profile</h2>
         <form id="user-info-form">
-            <div class="form-group">
-                <label>Age</label>
-                <input type="number" id="age" required>
-            </div>
-            <div class="form-group">
-                <label>Height (cm)</label>
-                <input type="number" id="height" required>
-            </div>
-            <div class="form-group">
-                <label>Weight (kg)</label>
-                <input type="number" id="weight" required>
-            </div>
-            <div class="form-group">
-                <label>Purpose of Exercise</label>
-                <select id="exercise-purpose">
-                    <option value="Weight Loss">Weight Loss</option>
-                    <option value="Muscle Gain">Muscle Gain</option>
-                    <option value="General Fitness">General Fitness</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Do you have an injury?</label>
-                <select id="injury">
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Diet Preference</label>
-                <select id="diet">
-                    <option value="Vegetarian">Vegetarian</option>
-                    <option value="Non-Vegetarian">Non-Vegetarian</option>
-                </select>
-            </div>
-            <button type="submit" class="btn">Save</button>
+            <input type="number" id="age" required placeholder="Enter your age">
+            <input type="number" id="height" required placeholder="Enter your height (cm)">
+            <input type="number" id="weight" required placeholder="Enter your weight (kg)">
+            <select id="exercise-purpose">
+                <option value="Weight Loss">Weight Loss</option>
+                <option value="Muscle Gain">Muscle Gain</option>
+                <option value="General Fitness">General Fitness</option>
+            </select>
+            <input type="text" id="injury" placeholder="Any injury (if any)">
+            <select id="diet">
+                <option value="Vegetarian">Vegetarian</option>
+                <option value="Non-Vegetarian">Non-Vegetarian</option>
+            </select>
+            <button type="submit">Save & Continue</button>
         </form>
+        
     </div>
 </body>
 </html>
