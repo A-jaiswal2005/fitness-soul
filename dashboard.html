@@ -3,66 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Complete Your Profile | Fitness Soul</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            text-align: center; 
-            padding: 50px; 
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f9fc;
+            margin: 0;
+            padding: 0;
         }
-        h1 { 
-            color: #4F46E5; 
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        .logout-btn {
-            background-color: #4F46E5;
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 20px;
+            border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
-            border-radius: 5px;
-            margin-top: 20px;
+            width: 100%;
         }
-        .logout-btn:hover { 
-            background-color: #4338CA; 
+        button:hover {
+            background-color: #45a049;
+        }
+        .error-message {
+            color: #d9534f;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
         }
     </style>
 </head>
 <body>
-    <h1>Welcome to Your Dashboard</h1>
-    <p>You have successfully signed in!</p>
-    <button class="logout-btn" id="logout">Log Out</button>
+    <div class="container">
+        <h1>Complete Your Profile</h1>
+        <form id="user-info-form">
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+            <div class="form-group">
+                <label for="height">Height (cm)</label>
+                <input type="number" id="height" name="height" required>
+            </div>
+            <div class="form-group">
+                <label for="weight">Weight (kg)</label>
+                <input type="number" id="weight" name="weight" required>
+            </div>
+            <div class="form-group">
+                <label for="exercisePurpose">Exercise Purpose</label>
+                <select id="exercisePurpose" name="exercisePurpose" required>
+                    <option value="">Select Purpose</option>
+                    <option value="weightLoss">Weight Loss</option>
+                    <option value="muscleBuild">Muscle Building</option>
+                    <option value="stayFit">Stay Fit</option>
+                    <option value="improveStamina">Improve Stamina</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="injury">Any Injuries?</label>
+                <select id="injury" name="injury" required>
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                </select>
+            </div>
+            <div class="form-group" id="injury-details-group" style="display: none;">
+                <label for="injuryDetails">Injury Details</label>
+                <input type="text" id="injuryDetails" name="injuryDetails" placeholder="Describe your injury">
+            </div>
+            <div class="form-group">
+                <label for="diet">Diet Preference</label>
+                <select id="diet" name="diet" required>
+                    <option value="">Select Diet</option>
+                    <option value="veg">Vegetarian</option>
+                    <option value="nonVeg">Non-Vegetarian</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <button type="submit">Save Profile</button>
+        </form>
+        <div id="error-message" class="error-message"></div>
+    </div>
 
-    <!-- Firebase SDK -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.1.0/firebase-app.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.1.0/firebase-auth.min.js"></script>
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
 
-    <script>
-      import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBls-s1CGz5gaE8Dy_uc1aGcVi7nvvr7WI",
+            authDomain: "fitness-soul-454717.firebaseapp.com",
+            projectId: "fitness-soul-454717",
+            storageBucket: "fitness-soul-454717.appspot.com",
+            messagingSenderId: "631085760200",
+            appId: "1:631085760200:web:6310857602000000000000"
+        };
 
-const auth = getAuth();
-const db = getFirestore();
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        let currentUser = null;
 
-onAuthStateChanged(auth, async (user) => {
-    if (user) {
-        const userRef = doc(db, "users", user.uid);
-        const userDoc = await getDoc(userRef);
+        // Check if user is logged in
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                currentUser = user;
+                console.log("User is signed in:", user.uid);
+                
+                // Check if user already has profile data
+                try {
+                    const userDoc = await getDoc(doc(db, "users", user.uid));
+                    if (userDoc.exists() && userDoc.data().age !== null) {
+                        // User already has data, redirect to dashboard
+                        console.log("User already has profile data, redirecting to dashboard");
+                        window.location.href = "dashboard.html";
+                    }
+                } catch (error) {
+                    console.error("Error checking user data:", error);
+                }
+            } else {
+                // No user is signed in, redirect to login
+                console.log("No user is signed in, redirecting to login");
+                window.location.href = "index.html";
+            }
+        });
 
-        if (userDoc.exists()) {
-            const data = userDoc.data();
-            document.getElementById("user-age").textContent = data.age;
-            document.getElementById("user-height").textContent = data.height;
-            document.getElementById("user-weight").textContent = data.weight;
-            document.getElementById("user-purpose").textContent = data.exercisePurpose;
-            document.getElementById("user-injury").textContent = data.injury || "None";
-            document.getElementById("user-diet").textContent = data.diet;
-        }
-    } else {
-        window.location.href = "/index.html"; // Redirect if not signed in
-    }
-});
+        // Show/hide injury details based on selection
+        document.getElementById('injury').addEventListener('change', function() {
+            const injuryDetailsGroup = document.getElementById('injury-details-group');
+            injuryDetailsGroup.style.display = this.value === 'yes' ? 'block' : 'none';
+            
+            // Reset the field when hidden
+            if (this.value !== 'yes') {
+                document.getElementById('injuryDetails').value = '';
+            }
+        });
 
+        // Form submission
+        document.getElementById('user-info-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (!currentUser) {
+                document.getElementById('error-message').textContent = "No user logged in. Please sign in again.";
+                document.getElementById('error-message').style.display = 'block';
+                return;
+            }
+            
+            const age = document.getElementById('age').value;
+            const height = document.getElementById('height').value;
+            const weight = document.getElementById('weight').value;
+            const exercisePurpose = document.getElementById('exercisePurpose').value;
+            const injury = document.getElementById('injury').value;
+            const injuryDetails = injury === 'yes' ? document.getElementById('injuryDetails').value : '';
+            const diet = document.getElementById('diet').value;
+            
+            try {
+                // Get existing user data
+                const userRef = doc(db, "users", currentUser.uid);
+                const userDoc = await getDoc(userRef);
+                
+                if (userDoc.exists()) {
+                    // Update existing document
+                    await setDoc(userRef, {
+                        ...userDoc.data(), // Keep existing data
+                        age: parseInt(age),
+                        height: parseInt(height),
+                        weight: parseInt(weight),
+                        exercisePurpose: exercisePurpose,
+                        injury: injury,
+                        injuryDetails: injuryDetails,
+                        diet: diet
+                    });
+                } else {
+                    // Create new document
+                    await setDoc(userRef, {
+                        email: currentUser.email,
+                        fullName: currentUser.displayName || '',
+                        age: parseInt(age),
+                        height: parseInt(height),
+                        weight: parseInt(weight),
+                        exercisePurpose: exercisePurpose,
+                        injury: injury,
+                        injuryDetails: injuryDetails,
+                        diet: diet
+                    });
+                }
+                
+                console.log("Profile data saved successfully");
+                window.location.href = "dashboard.html";
+            } catch (error) {
+                console.error("Error saving profile data:", error);
+                document.getElementById('error-message').textContent = error.message;
+                document.getElementById('error-message').style.display = 'block';
+            }
+        });
     </script>
 </body>
 </html>

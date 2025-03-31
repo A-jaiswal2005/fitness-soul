@@ -108,7 +108,7 @@ document.getElementById('form-signup').addEventListener('submit', (e) => {
         .then(async (userCredential) => {
             console.log("User signed up:", userCredential.user);
             await saveUserInfo(userCredential.user.uid, fullName, email);
-            window.location.href = "/user-info.html"; // Redirect to user info form
+            window.location.href = "user-info.html"; // Redirect to user info form
         })
         .catch((error) => {
             document.getElementById('signup-error').textContent = error.message;
@@ -121,7 +121,7 @@ const googleSignIn = () => {
     signInWithPopup(auth, provider)
         .then(async (result) => {
             console.log("Google Sign In successful:", result.user);
-            const userDoc = await getDoc(doc(db, "users", result.user.uid));
+            const userDoc = await getDoc(doc(db, "user", result.user.uid));
 
             if (!userDoc.exists()) {
                 await saveUserInfo(result.user.uid, result.user.displayName, result.user.email);
@@ -142,9 +142,9 @@ document.getElementById('google-signup').addEventListener('click', googleSignIn)
 const checkUserProfile = async (userId) => {
     const userDoc = await getDoc(doc(db, "users", userId));
     if (userDoc.exists() && userDoc.data().age !== null) {
-        window.location.href = "/dashboard.html"; // Redirect if profile is complete
+        window.location.href = "dashboard.html"; // Redirect if profile is complete
     } else {
-        window.location.href = "/user-info.html"; // Redirect to user info form
+        window.location.href = "user-info.html"; // Redirect to user info form
     }
 };
 
