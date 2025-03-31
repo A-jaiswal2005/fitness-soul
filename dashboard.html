@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            padding: 50px; 
+        }
+        h1 { 
+            color: #4F46E5; 
+        }
+        .logout-btn {
+            background-color: #4F46E5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .logout-btn:hover { 
+            background-color: #4338CA; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Your Dashboard</h1>
+    <p>You have successfully signed in!</p>
+    <button class="logout-btn" id="logout">Log Out</button>
+
+    <!-- Firebase SDK -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.1.0/firebase-app.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.1.0/firebase-auth.min.js"></script>
+
+    <script>
+        
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBls-s1CGz5gaE8Dy_uc1aGcVi7nvvr7WI",
+            authDomain: "fitness-soul-454717.firebaseapp.com",
+            projectId: "fitness-soul-454717",
+            storageBucket: "fitness-soul-454717.appspot.com",
+            messagingSenderId: "631085760200",
+            appId: "1:631085760200:web:6310857602000000000000"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        console.log("Firebase Initialized:", firebase);
+console.log("Firebase Auth Instance:", firebase.auth());
+
+
+        // Logout Button Functionality
+        document.getElementById('logout').addEventListener('click', () => {
+            auth.signOut().then(() => {
+                window.location.href = "index.html";  // Redirect to Home Page
+            }).catch((error) => {
+                console.error("Logout Error:", error);
+            });
+        });
+
+        // Redirect If Not Logged In
+        auth.onAuthStateChanged((user) => {
+            if (!user) {
+                window.location.href = "index.html"; // Redirect if not logged in
+            }
+        });
+    </script>
+</body>
+</html>
