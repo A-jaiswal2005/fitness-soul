@@ -8,11 +8,11 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
-const GEMINI_API_KEY = "AIzaSyCjMEnJ74_fQktHxMhzJIU4xq5sYXGMbCU";
+const GEMINI_API_KEY = "AIzaSyAxOsBusVANIFO75O-EqxK_z1ac7peyQCI";
 
 app.get('/exercise-plan', async (req, res) => {
     try {
-        const prompt = `Generate a structured JSON for a 7-day workout plan for a 20-year-old indian male with a BMI of 28 and toned body. Format:
+        const prompt = `Generate a structured JSON for a 7-day workout plan for a 5-year-old indian female with a BMI of 15 and fit body. Format:
 {
     "workoutPlan": {
         "description": "Summary of the plan",
@@ -34,7 +34,7 @@ app.get('/exercise-plan', async (req, res) => {
             {
                 headers: {
                     "Content-Type": "application/json",
-                    "x-goog-api-key": GEMINI_API_KEY, //API key in header
+                    "x-goog-api-key": "AIzaSyAxOsBusVANIFO75O-EqxK_z1ac7peyQCI", //API key in header
                 },
             }
         );

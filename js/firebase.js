@@ -17,12 +17,12 @@ import {
 
 // Firebase Configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyBls-s1CGz5gaE8Dy_uc1aGcVi7nvvr7WI",
-    authDomain: "fitness-soul-454717.firebaseapp.com",
-    projectId: "fitness-soul-454717",
-    storageBucket: "fitness-soul-454717.appspot.com",
-    messagingSenderId: "631085760200",
-    appId: "1:631085760200:web:6310857602000000000000"
+    apiKey: "AIzaSyBpguw_5fYNtpA2zW2SPZEr1utQF4YEm_s",
+    authDomain: "fitness-soul-9277b.firebaseapp.com",
+    projectId: "fitness-soul-9277b",
+    storageBucket: "fitness-soul-9277b.appspot.com",
+    messagingSenderId: "350767055636",
+    appId: "1:350767055636:web:3507670556360000000000"
 };
 
 // Initialize Firebase
@@ -30,6 +30,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
+
 
 // Function to Switch Tabs
 document.querySelectorAll('.tab').forEach(tab => {
@@ -47,19 +48,6 @@ document.querySelectorAll('.tab').forEach(tab => {
 });
 
 // Function to Save User Info in Firestore
-const saveUserInfo = async (userId, fullName, email) => {
-    await setDoc(doc(db, "users", userId), {
-        fullName: fullName,
-        email: email,
-        age: null,
-        height: null,
-        weight: null,
-        exercisePurpose: null,
-        injury: null,
-        diet: null
-    });
-};
-
 // Sign In Function
 document.getElementById('form-signin').addEventListener('submit', async (e) => {
     e.preventDefault();
