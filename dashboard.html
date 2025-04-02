@@ -3,55 +3,418 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-      import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
-
-      // Firebase Configuration
-      const firebaseConfig = {
-        apiKey: "YOUR_API_KEY",
-        authDomain: "YOUR_AUTH_DOMAIN",
-        projectId: "YOUR_PROJECT_ID",
-        storageBucket: "YOUR_STORAGE_BUCKET",
-        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-        appId: "YOUR_APP_ID"
-      };
-
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      const db = getFirestore(app);
-
-      async function loadUserProfile() {
-        const userName = localStorage.getItem("userName"); // Assume name is stored in local storage
-        if (!userName) {
-          document.getElementById("profile").innerHTML = "No profile found!";
-          return;
+    <title>Fitness Soul - Dashboard</title>
+    <style>
+        :root {
+            --primary: #4CAF50;
+            --secondary: #2E7D32;
+            --light: #E8F5E9;
+            --dark: #1B5E20;
+            --text-dark: #212121;
+            --text-light: #FFFFFF;
+            --gray: #757575;
+            --light-gray: #EEEEEE;
         }
-
-        const docRef = doc(db, "users", userName);
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-          const user = docSnap.data();
-          document.getElementById("profile").innerHTML = `
-            <h2>${user.name}</h2>
-            <p>Age: ${user.age}</p>
-            <p>Gender: ${user.gender}</p>
-            <p>Weight: ${user.weight} kg</p>
-            <p>Height: ${user.height} cm</p>
-            <p>Goal: ${user.goal}</p>
-          `;
-        } else {
-          document.getElementById("profile").innerHTML = "Profile not found!";
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-      }
-
-      loadUserProfile();
-    </script>
+        
+        body {
+            background-color: var(--light);
+            color: var(--text-dark);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: var(--text-light);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .username {
+            font-weight: 500;
+        }
+        
+        .btn {
+            background-color: var(--secondary);
+            color: var(--text-light);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--dark);
+        }
+        
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .profile-summary {
+            background-color: var(--text-light);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .profile-name {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .profile-motto {
+            text-align: center;
+            color: var(--gray);
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .profile-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .metric {
+            background-color: var(--light);
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .metric-label {
+            font-size: 14px;
+            color: var(--gray);
+        }
+        
+        .profile-details {
+            background-color: var(--text-light);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--primary);
+            font-weight: bold;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .profile-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .info-item {
+            margin-bottom: 15px;
+        }
+        
+        .info-label {
+            font-size: 14px;
+            color: var(--gray);
+            margin-bottom: 5px;
+        }
+        
+        .info-value {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        .alert {
+            background-color: var(--light);
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Your Dashboard</h1>
-    <div id="profile">Loading profile...</div>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Fitness Soul</div>
+            <div class="user-actions">
+                <span class="username" id="headerUsername">Loading...</span>
+                <button class="btn" id="logoutBtn">Logout</button>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="dashboard">
+            <div class="profile-summary">
+                <div class="profile-image" id="profileInitial">?</div>
+                <h2 class="profile-name" id="profileName">Loading...</h2>
+                <p class="profile-motto" id="profileMotto">Loading...</p>
+                
+                <div class="profile-metrics">
+                    <div class="metric">
+                        <div class="metric-value" id="bmiValue">--</div>
+                        <div class="metric-label">BMI</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value" id="goalValue">--</div>
+                        <div class="metric-label">Goal</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value" id="ageValue">--</div>
+                        <div class="metric-label">Age</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value" id="experienceValue">--</div>
+                        <div class="metric-label">Experience</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profile-details">
+                <div class="alert" id="welcomeAlert">Welcome back! Your fitness journey continues.</div>
+                
+                <h3 class="section-title">Personal Information</h3>
+                <div class="profile-info">
+                    <div class="info-item">
+                        <div class="info-label">Full Name</div>
+                        <div class="info-value" id="fullName">Loading...</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Gender</div>
+                        <div class="info-value" id="gender">Loading...</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Weight</div>
+                        <div class="info-value" id="weight">Loading...</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Height</div>
+                        <div class="info-value" id="height">Loading...</div>
+                    </div>
+                </div>
+                
+                <h3 class="section-title">Fitness Profile</h3>
+                <div class="profile-info">
+                    <div class="info-item">
+                        <div class="info-label">Diet Preference</div>
+                        <div class="info-value" id="diet">Loading...</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Experience Level</div>
+                        <div class="info-value" id="experience">Loading...</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Fitness Goal</div>
+                        <div class="info-value" id="goal">Loading...</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Injury History</div>
+                        <div class="info-value" id="injury">Loading...</div>
+                    </div>
+                </div>
+                
+                <div class="edit-profile">
+                    <button class="btn" id="editProfileBtn">Edit Profile</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+        import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBpguw_5fYNtpA2zW2SPZEr1utQF4YEm_s",
+            authDomain: "fitness-soul-9277b.firebaseapp.com",
+            projectId: "fitness-soul-9277b",
+            storageBucket: "fitness-soul-9277b.appspot.com",
+            messagingSenderId: "350767055636",
+            appId: "1:350767055636:web:3507670556360000000000"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth();
+
+        // DOM elements
+        const logoutBtn = document.getElementById('logoutBtn');
+        const editProfileBtn = document.getElementById('editProfileBtn');
+
+        // Handle logout
+        logoutBtn.addEventListener('click', async () => {
+            try {
+                await signOut(auth);
+                window.location.href = "index.html"; // Redirect to login page
+            } catch (error) {
+                console.error("Error signing out:", error);
+                alert("Failed to log out. Please try again.");
+            }
+        });
+
+        // Edit profile button
+        editProfileBtn.addEventListener('click', () => {
+            window.location.href = "user-info.html"; // Redirect to profile edit page
+        });
+
+        // Check authentication state and load user data
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                console.log("User signed in:", user.uid);
+                loadUserData(user.uid);
+            } else {
+                console.log("No user signed in.");
+                window.location.href = "index.html"; // Redirect to login page
+            }
+        });
+
+        // Load user data from Firestore
+        async function loadUserData(userId) {
+            try {
+                const docRef = doc(db, "users", userId);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const userData = docSnap.data();
+                    displayUserData(userData);
+                } else {
+                    console.log("No user data found!");
+                    alert("Your profile data couldn't be found. Please set up your profile.");
+                    window.location.href = "user-info.html"; // Redirect to profile setup
+                }
+            } catch (error) {
+                console.error("Error loading user data:", error);
+                alert("Failed to load your profile data. Please try again.");
+            }
+        }
+
+        // Display user data in the dashboard
+        function displayUserData(userData) {
+            // Header
+            document.getElementById('headerUsername').textContent = userData.name || "User";
+            
+            // Profile Summary
+            const profileName = document.getElementById('profileName');
+            profileName.textContent = userData.name || "Anonymous";
+            
+            // Set profile initial
+            const profileInitial = document.getElementById('profileInitial');
+            profileInitial.textContent = (userData.name ? userData.name.charAt(0).toUpperCase() : "?");
+            
+            // Profile motto
+            document.getElementById('profileMotto').textContent = userData.motto || "No motto set";
+            
+            // Calculate BMI
+            const weight = parseFloat(userData.weight);
+            const height = parseFloat(userData.height);
+            if (weight && height) {
+                const bmi = (weight / ((height / 100) ** 2)).toFixed(1);
+                document.getElementById('bmiValue').textContent = bmi;
+            }
+            
+            // Metrics
+            document.getElementById('goalValue').textContent = userData.goal ? userData.goal.split(' ')[0] : "--";
+            document.getElementById('ageValue').textContent = userData.age || "--";
+            document.getElementById('experienceValue').textContent = userData.experience ? userData.experience.charAt(0).toUpperCase() : "--";
+            
+            // Personal Information
+            document.getElementById('fullName').textContent = userData.name || "Not provided";
+            document.getElementById('gender').textContent = userData.gender || "Not provided";
+            document.getElementById('weight').textContent = userData.weight ? `${userData.weight} kg` : "Not provided";
+            document.getElementById('height').textContent = userData.height ? `${userData.height} cm` : "Not provided";
+            
+            // Fitness Profile
+            document.getElementById('diet').textContent = userData.diet || "Not specified";
+            document.getElementById('experience').textContent = userData.experience || "Not specified";
+            document.getElementById('goal').textContent = userData.goal || "Not specified";
+            document.getElementById('injury').textContent = userData.injury || "None reported";
+            
+            // Welcome message
+            const welcomeAlert = document.getElementById('welcomeAlert');
+            const hour = new Date().getHours();
+            let greeting = "Welcome back";
+            
+            if (hour < 12) {
+                greeting = "Good morning";
+            } else if (hour < 18) {
+                greeting = "Good afternoon";
+            } else {
+                greeting = "Good evening";
+            }
+            
+            welcomeAlert.textContent = `${greeting}, ${userData.name || "fitness enthusiast"}! Your fitness journey continues.`;
+        }
+    </script>
 </body>
 </html>

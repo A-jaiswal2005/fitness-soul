@@ -651,7 +651,7 @@
                     showAlert(loginAlert, 'Login successful!', 'success');
                     
                     // Here you would typically redirect to dashboard
-                     window.location.href = 'user-info.html';
+                     window.location.href = 'dashboard.html';
                 })
                 .catch((error) => {
                     handleAuthError(error, loginAlert);
@@ -698,7 +698,7 @@
                     showAlert(signupAlert, 'Account created successfully!', 'success');
                     
                     // Here you would typically redirect to dashboard or verification page
-                    // window.location.href = '/dashboard.html';
+                    window.location.href = 'user-info.html';
                     
                     // Optional: Switch to login form after successful signup
                     setTimeout(() => {
