@@ -12,7 +12,7 @@ const GEMINI_API_KEY = "AIzaSyAxOsBusVANIFO75O-EqxK_z1ac7peyQCI";
 
 app.get('/exercise-plan', async (req, res) => {
     try {
-        const prompt = `Generate a structured JSON for a 7-day workout plan for a 5-year-old indian female with a BMI of 15 and fit body. Format:
+        const prompt = `Generate a structured JSON for a 7-day workout plan for a 19-year-old indian male with a BMI of 21.2 and fit body. Format:
 {
     "workoutPlan": {
         "description": "Summary of the plan",
