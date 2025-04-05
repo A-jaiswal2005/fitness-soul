@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise Plan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #5e17eb;
+            --secondary: #5a0cf7;
+            --light: #E8F5E9;
+            --dark: #5a0cf7;
+            --text-dark: #212121;
+            --text-light: #FFFFFF;
+            --gray: #757575;
+            --light-gray: #EEEEEE;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text-dark);
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: var(--text-light);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .btn {
+            background-color: var(--secondary);
+            color: var(--text-light);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--dark);
+        }
+        .alert {
+            background-color: var(--light);
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+        }
+        .main-nav {
+        background: linear-gradient(90deg, #34b199, #3498db);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        margin-bottom: 25px;
+    }
+    
+    .nav-list {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        padding: 0;
+        margin: 0;
+        overflow-x: auto;
+    }
+    
+    .nav-item {
+        position: relative;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 15px 20px;
+        color: rgba(255, 255, 255, 0.9);
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        min-width: 100px;
+        text-align: center;
+    }
+    
+    .nav-link i {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+    }
+    
+    .nav-item.active .nav-link {
+        color: white;
+        background-color: rgba(255, 255, 255, 0.15);
+    }
+    
+    .nav-item:hover .nav-link {
+        color: white;
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: translateY(-3px);
+    }
+    
+    .nav-item::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 3px;
+        background-color: white;
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+    }
+    
+    .nav-item.active::after,
+    .nav-item:hover::after {
+        width: 70%;
+    }
+    
+    .coming-soon-badge {
+        position: absolute;
+        top: 5px;
+        right: 2px;
+        background-color: #ff7675;
+        color: white;
+        font-size: 0.6rem;
+        padding: 2px 5px;
+        border-radius: 10px;
+        font-weight: bold;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .nav-link {
+            padding: 12px 15px;
+            min-width: 80px;
+            font-size: 0.9rem;
+        }
+        
+        .coming-soon-badge {
+            font-size: 0.5rem;
+            padding: 1px 3px;
+        }
+    }
+    .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .intro {
+            text-align: center;
+            margin: 3rem 0;
+        }
+        
+        .intro h2 {
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .intro h2::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-light);
+            border-radius: 2px;
+        }
+        
+        .intro p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+        
+ /* Section Background */
+.selector-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  background-color: #eaf5eb; /* soft green background */
+}
+
+/* Wrapper - reduced top padding and no internal spacing */
+.dropdown-wrapper {
+  padding: 20px 0; /* reduced top/bottom padding */
+  border-radius: 12px;
+  background: linear-gradient(to right, #34b198b4, #410bd794); /* light bluish box */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.318);
+  width: 200%;
+  max-width: 550px; /* wider wrapper */
+  display: flex;
+  justify-content: center;
+}
+
+/* Styled Select Dropdown */
+.problem-select {
+  width: 100%;
+  max-width: 500px; /* wider dropdown */
+  padding: 18px 22px; /* larger size for better touch UX */
+  font-size: 18px;
+  border: 2px solid #d9e5ff;
+  border-radius: 14px;
+  background-color: #fff;
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+  transition: 0.3s ease;
+  appearance: none;
+
+  background-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' fill='%23666' viewBox='0 0 24 24'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 18px center;
+  background-size: 16px;
+}
+
+/* On focus */
+.problem-select:focus {
+  border-color: #514ee6;
+  box-shadow: 0 0 0 4px rgba(103, 93, 212, 0.363);
+  outline: none;
+}    
+        .tips-container {
+            display: none;
+            margin-top: 3rem;
+        }
+        
+        .tips-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .asanas-container {
+            display: none;
+            margin-top: 3rem;
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        .asanas-container.active {
+            display: block;
+        }
+        
+        .asanas-header {
+            color: var(--primary-dark);
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .asanas-header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-light), var(--primary-dark));
+            border-radius: 3px;
+        }
+        
+        .asanas-description {
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+        
+        .asana-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .asana-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(106, 13, 173, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(106, 13, 173, 0.1);
+        }
+        
+        .asana-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(106, 13, 173, 0.15);
+        }
+        
+        .asana-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--primary-light);
+        }
+        
+        .asana-content {
+            padding: 1.5rem;
+        }
+        
+        .asana-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .asana-title i {
+            color: var(--primary-light);
+        }
+        
+        .asana-details {
+            margin-bottom: 1.5rem;
+        }
+        
+        .detail-row {
+            display: flex;
+            margin-bottom: 0.8rem;
+            align-items: center;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: var(--primary-dark);
+            min-width: 120px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .detail-value {
+            color: var(--text-dark);
+        }
+        
+        .asana-benefits {
+            background-color: rgba(106, 13, 173, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            border-left: 4px solid var(--primary-light);
+        }
+        
+        .benefits-title {
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .benefits-list {
+            padding-left: 1.5rem;
+        }
+        
+        .benefits-list li {
+            margin-bottom: 0.3rem;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+            color: black;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 100%;
+            margin: 0 auto;
+        }         
+        .disclaimer {
+            font-style: italic;
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-top: 1.5rem;
+            line-height: 1.5;
+
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .intro h2 {
+                font-size: 1.8rem;
+            }
+            
+            .asanas-header {
+                font-size: 1.5rem;
+            }
+            
+            .asana-grid {
+                grid-template-columns: 1fr;
+            }
+            
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Fitness Soul</div>
+            <div class="user-actions">
+                <span class="username"><a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    Profile
+                </a></span>
+                <span class="btn" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </span>
+            </div>
+        </div>
+    </header>
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="ai_gym.html" class="nav-link">
+                        <i class="fas fa-dumbbell"></i>
+                        AI Gym Plan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ai_diet.html" class="nav-link">
+                        <i class="fas fa-apple-alt"></i>
+                        AI Diet Plan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ayurveda.html" class="nav-link">
+                        <i class="fas fa-leaf"></i>
+                        Ayurvedic Tips
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="yoga.html" class="nav-link">
+                        <i class="fas fa-pray"></i>
+                        Yoga
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" id="leaderboardLink">
+                        <i class="fas fa-trophy"></i>
+                        Leaderboard
+                        <span class="coming-soon-badge">Coming Soon</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="intro">
+            <h2>Personalized Yoga Solutions</h2>
+            <p>Select your health concern below to discover tailored yoga asanas with detailed instructions, optimal practice times, and therapeutic benefits to support your healing journey.</p>
+        </div>
+        
+        <section class="selector-section">
+            <div class="dropdown-wrapper">
+                <select class="problem-select" id="problemSelect">
+                    <option value="" selected disabled>Select your health concern</option>
+                    <option value="back-pain">Back Pain & Spine Health</option>
+                    <option value="stress-anxiety">Stress & Anxiety</option>
+                    <option value="digestive-issues">Digestive Issues</option>
+                    <option value="insomnia">Insomnia & Sleep Disorders</option>
+                    <option value="respiratory">Respiratory Health</option>
+                    <option value="hypertension">Hypertension</option>
+                    <option value="diabetes">Diabetes Management</option>
+                    <option value="weight-loss">Weight Management</option>
+                </select>
+            </div>
+        </section>
+        
+        <!-- Back Pain Section -->
+        <div class="asanas-container" id="back-pain">
+            <h3 class="asanas-header">Yoga for Back Pain & Spine Health</h3>
+            <p class="asanas-description">These carefully selected asanas help strengthen the back muscles, improve spinal flexibility, and relieve tension in the vertebral column. Practice regularly for lasting relief.</p>
+            
+            <div class="asana-grid">
+                <div class="asana-card">
+                    <img src="https://www.yogajournal.com/wp-content/uploads/2021/09/Bhujangasana_Andrew-Clark_1353.jpg" alt="Bhujangasana" class="asana-img">
+                    <div class="asana-content">
+                        <h4 class="asana-title"><i class="fas fa-spa"></i> Bhujangasana (Cobra Pose)</h4>
+                        <div class="asana-details">
+                            <div class="detail-row">
+                                <span class="detail-label"><i class="far fa-clock"></i> Duration:</span>
+                                <span class="detail-value">30-60 seconds (3-5 rounds)</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label"><i class="far fa-sun"></i> Best Time:</span>
+                                <span class="detail-value">Morning on empty stomach</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label"><i class="fas fa-calendar-alt"></i> Frequency:</span>
+                                <span class="detail-value">Daily</span>
+                            </div>
+                        </div>
+                        <div class="asana-benefits">
+                            <h5 class="benefits-title"><i class="fas fa-heartbeat"></i> Therapeutic Benefits:</h5>
+                            <ul class="benefits-list">
+                                <li>Strengthens the spine</li>
+                                <li>Stretches chest and shoulders</li>
+                                <li>Improves flexibility of upper and middle back</li>
+                                <li>Relieves mild backache</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="asana-card">
+                    <img src="https://www.yogajournal.com/wp-content/uploads/2021/09/ChildsPose_Andrew-Clark_0217.jpg" alt="Balasana" class="asana-img">
+                    <div class="asana-content">
+                        <h4 class="asana-title"><i class="fas fa-spa"></i> Balasana (Child's Pose)</h4>
+                        <div class="asana-details">
+                            <div class="detail-row">
+                                <span class="detail-label"><i class="far fa-clock"></i> Duration:</span>
+                                <span class="detail-value">1-3 minutes</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label"><i class="far fa-sun"></i> Best Time:</span>
+                                <span class="detail-value">Anytime (especially after backbends)</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label"><i class="fas fa-calendar-alt"></i> Frequency:</span>
+                                <span class="detail-value">Daily, especially when experiencing pain</span>
+                            </div>
+                        </div>
+                        <div class="asana-benefits">
+                            <h5 class="benefits-title"><i class="fas fa-heartbeat"></i> Therapeutic Benefits:</h5>
+                            <ul class="benefits-list">
+                                <li>Gently stretches lower back</li>
+                                <li>Relieves spinal compression</li>
+                                <li>Calms the nervous system</li>
+                                <li>Reduces stress and fatigue</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="asana-card">
+                    <img src="https://www.yogajournal.com/wp-content/uploads/2021/09/Ardha-Matsyendrasana_Andrew-Clark_2929.jpg" alt="Ardha Matsyendrasana" class="asana-img">
+                    <div class="asana-content">
+                        <h4 class="asana-title"><i class="fas fa-spa"></i> Ardha Matsyendrasana (Half Lord of the Fishes Pose)</h4>
+                        <div class="asana-details">
+                            <div class="detail-row">
+                                <span class="detail-label"><i class="far fa-clock"></i> Duration:</span>
+                                <span class="detail-value">30-60 seconds per side</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label"><i class="far fa-sun"></i> Best Time:</span>
+                                <span class="detail-value">Morning or evening (3+ hours after meals)</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label"><i class="fas fa-calendar-alt"></i> Frequency:</span>
+                                <span class="detail-value">3-5 times per week</span>
+                            </div>
+                        </div>
+                        <div class="asana-benefits">
+                            <h5 class="benefits-title"><i class="fas fa-heartbeat"></i> Therapeutic Benefits:</h5>
+                            <ul class="benefits-list">
+                                <li>Increases spinal flexibility</li>
+                                <li>Relieves stiffness in back muscles</li>
+                                <li>Stimulates spinal nerves</li>
+                                <li>Improves posture and alignment</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Stress & Anxiety Section -->
+        <div class="asanas-container" id="stress-anxiety">
+            <h3 class="asanas-header">Yoga for Stress & Anxiety Relief</h3>
+            <p class="asanas-description">These calming asanas and practices help activate the parasympathetic nervous system, reduce cortisol levels, and promote deep relaxation.</p>
+            
+            <div class="asana-grid">
+                <div class="asana-card">
+                    <img src="https://www.yogajournal.com/wp-content/uploads/2021/09/Viparita-Karani_Andrew-Clark_2929.jpg" alt="Viparita Karani" class="asana-img">
+                    <div class="asana-content">
+                        <h4 class="asana-title"><i class="fas fa-spa"></i> Viparita Karani (Legs-Up-the-Wall Pose)</h4>
+                        <div class="asana-details">
+                            <div class="detail-row">
+                                <span class="detail-label"><i class="far fa-clock"></i> Duration:</span>
+                                <span class="detail-value">5-15 minutes</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label"><i class="far fa-sun"></i> Best Time:</span>
+                                <span class="detail-value">Evening before dinner or before bed</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label"><i class="fas fa-calendar-alt"></i> Frequency:</span>
+                                <span class="detail-value">Daily during stressful periods</span>
+                            </div>
+                        </div>
+                        <div class="asana-benefits">
+                            <h5 class="benefits-title"><i class="fas fa-heartbeat"></i> Therapeutic Benefits:</h5>
+                            <ul class="benefits-list">
+                                <li>Calms the nervous system</li>
+                                <li>Reduces anxiety and mild depression</li>
+                                <li>Relieves tired legs and feet</li>
+                                <li>Helps lower blood pressure</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="asana-card">
+                    <img src="https://www.yogajournal.com/wp-content/uploads/2021/09/Savasana_Andrew-Clark_2929.jpg" alt="Savasana" class="asana-img">
+                    <div class="asana-content">
+                        <h4 class="asana-title"><i class="fas fa-spa"></i> Savasana (Corpse Pose)</h4>
+                        <div class="asana-details">
+                            <div class="detail-row">
+                                <span class="detail-label"><i class="far fa-clock"></i> Duration:</span>
+                                <span class="detail-value">10-20 minutes</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label"><i class="far fa-sun"></i> Best Time:</span>
+                                <span class="detail-value">Anytime, especially after practice</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label"><i class="fas fa-calendar-alt"></i> Frequency:</span>
+                                <span class="detail-value">Daily (essential after yoga practice)</span>
+                            </div>
+                        </div>
+                        <div class="asana-benefits">
+                            <h5 class="benefits-title"><i class="fas fa-heartbeat"></i> Therapeutic Benefits:</h5>
+                            <ul class="benefits-list">
+                                <li>Deep relaxation for body and mind</li>
+                                <li>Reduces stress, anxiety and tension</li>
+                                <li>Lowers blood pressure</li>
+                                <li>Helps relieve insomnia</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="asana-card">
+                    <img src="https://www.yogajournal.com/wp-content/uploads/2021/09/Sukhasana_Andrew-Clark_2929.jpg" alt="Sukhasana" class="asana-img">
+                    <div class="asana-content">
+                        <h4 class="asana-title"><i class="fas fa-spa"></i> Sukhasana (Easy Pose) with Pranayama</h4>
+                        <div class="asana-details">
+                            <div class="detail-row">
+                                <span class="detail-label"><i class="far fa-clock"></i> Duration:</span>
+                                <span class="detail-value">5-10 minutes (with Nadi Shodhana)</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label"><i class="far fa-sun"></i> Best Time:</span>
+                                <span class="detail-value">Early morning or evening</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label"><i class="fas fa-calendar-alt"></i> Frequency:</span>
+                                <span class="detail-value">Twice daily during stressful periods</span>
+                            </div>
+                        </div>
+                        <div class="asana-benefits">
+                            <h5 class="benefits-title"><i class="fas fa-heartbeat"></i> Therapeutic Benefits:</h5>
+                            <ul class="benefits-list">
+                                <li>Calms the mind and reduces anxiety</li>
+                                <li>Balances left and right brain hemispheres</li>
+                                <li>Improves focus and mental clarity</li>
+                                <li>Reduces stress hormone levels</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Digestive Issues Section -->
+        <div class="asanas-container" id="digestive-issues">
+            <h3 class="asanas-header">Yoga for Digestive Health</h3>
+            <p class="asanas-description">Support your digestive system with yoga poses that stimulate the abdominal region and promote better digestion.</p>
+            <div class="asana-grid">
+                <!-- Pawanmuktasana -->
+                <div class="asana-card">
+                    <img src="https://www.yogajournal.com/wp-content/uploads/2021/09/Pawanmuktasana.jpg" alt="Pawanmuktasana" class="asana-img">
+                    <div class="asana-content">
+                        <h4 class="asana-title"><i class="fas fa-spa"></i> Pawanmuktasana (Wind-Relieving Pose)</h4>
+                        <div class="asana-details">
+                            <div class="detail-row"><span class="detail-label"><i class="far fa-clock"></i> Duration:</span><span class="detail-value">30 seconds per leg</span></div>
+                            <div class="detail-row"><span class="detail-label"><i class="far fa-sun"></i> Best Time:</span><span class="detail-value">Morning</span></div>
+                            <div class="detail-row"><span class="detail-label"><i class="fas fa-calendar-alt"></i> Frequency:</span><span class="detail-value">Daily</span></div>
+                        </div>
+                        <div class="asana-benefits">
+                            <h5 class="benefits-title"><i class="fas fa-heartbeat"></i> Therapeutic Benefits:</h5>
+                            <ul class="benefits-list">
+                                <li>Relieves gas and bloating</li>
+                                <li>Improves digestion</li>
+                                <li>Stimulates bowel movement</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Ardha Matsyendrasana (Reused from back pain for digestion too) -->
+                <div class="asana-card">
+                    <img src="https://www.yogajournal.com/wp-content/uploads/2021/09/Ardha-Matsyendrasana_Andrew-Clark_2929.jpg" alt="Ardha Matsyendrasana" class="asana-img">
+                    <div class="asana-content">
+                        <h4 class="asana-title"><i class="fas fa-spa"></i> Ardha Matsyendrasana (Half Lord of the Fishes)</h4>
+                        <div class="asana-details">
+                            <div class="detail-row"><span class="detail-label"><i class="far fa-clock"></i> Duration:</span><span class="detail-value">30 seconds per side</span></div>
+                            <div class="detail-row"><span class="detail-label"><i class="far fa-sun"></i> Best Time:</span><span class="detail-value">Empty stomach</span></div>
+                            <div class="detail-row"><span class="detail-label"><i class="fas fa-calendar-alt"></i> Frequency:</span><span class="detail-value">3–4 times/week</span></div>
+                        </div>
+                        <div class="asana-benefits">
+                            <h5 class="benefits-title"><i class="fas fa-heartbeat"></i> Therapeutic Benefits:</h5>
+                            <ul class="benefits-list">
+                                <li>Improves digestion</li>
+                                <li>Stimulates liver and pancreas</li>
+                                <li>Reduces constipation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Vajrasana -->
+                <div class="asana-card">
+                    <img src="https://www.yogajournal.com/wp-content/uploads/2021/09/Vajrasana_Andrew-Clark_0949.jpg" alt="Vajrasana" class="asana-img">
+                    <div class="asana-content">
+                        <h4 class="asana-title"><i class="fas fa-spa"></i> Vajrasana (Thunderbolt Pose)</h4>
+                        <div class="asana-details">
+                            <div class="detail-row"><span class="detail-label"><i class="far fa-clock"></i> Duration:</span><span class="detail-value">5–10 minutes after meals</span></div>
+                            <div class="detail-row"><span class="detail-label"><i class="far fa-sun"></i> Best Time:</span><span class="detail-value">Post-meal</span></div>
+                            <div class="detail-row"><span class="detail-label"><i class="fas fa-calendar-alt"></i> Frequency:</span><span class="detail-value">After every meal</span></div>
+                        </div>
+                        <div class="asana-benefits">
+                            <h5 class="benefits-title"><i class="fas fa-heartbeat"></i> Therapeutic Benefits:</h5>
+                            <ul class="benefits-list">
+                                <li>Aids digestion</li>
+                                <li>Prevents acidity and bloating</li>
+                                <li>Relieves stomach discomfort</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Insomnia Section -->
+        <div class="asanas-container" id="insomnia">
+            <h3 class="asanas-header">Yoga for Insomnia & Sleep Disorders</h3>
+            <p class="asanas-description">These poses help relax the body and calm the mind, improving sleep quality and duration.</p>
+            <div class="asana-grid">
+                <!-- Shavasana -->
+                <div class="asana-card">
+                    <img src="https://www.yogajournal.com/wp-content/uploads/2021/09/Savasana_Andrew-Clark_0185.jpg" alt="Shavasana" class="asana-img">
+                    <div class="asana-content">
+                        <h4 class="asana-title"><i class="fas fa-spa"></i> Shavasana (Corpse Pose)</h4>
+                        <div class="asana-details">
+                            <div class="detail-row"><span class="detail-label"><i class="far fa-clock"></i> Duration:</span><span class="detail-value">5–10 minutes</span></div>
+                            <div class="detail-row"><span class="detail-label"><i class="far fa-sun"></i> Best Time:</span><span class="detail-value">Before sleep</span></div>
+                            <div class="detail-row"><span class="detail-label"><i class="fas fa-calendar-alt"></i> Frequency:</span><span class="detail-value">Daily</span></div>
+                        </div>
+                        <div class="asana-benefits">
+                            <h5 class="benefits-title"><i class="fas fa-heartbeat"></i> Therapeutic Benefits:</h5>
+                            <ul class="benefits-list">
+                                <li>Deep relaxation</li>
+                                <li>Relieves fatigue and insomnia</li>
+                                <li>Calms nervous system</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Supta Baddha Konasana -->
+                <div class="asana-card">
+                    <img src="https://www.yogajournal.com/wp-content/uploads/2021/09/SuptaBaddhaKonasana_Andrew-Clark_0836.jpg" alt="Supta Baddha Konasana" class="asana-img">
+                    <div class="asana-content">
+                        <h4 class="asana-title"><i class="fas fa-spa"></i> Supta Baddha Konasana (Reclining Bound Angle)</h4>
+                        <div class="asana-details">
+                            <div class="detail-row"><span class="detail-label"><i class="far fa-clock"></i> Duration:</span><span class="detail-value">5–10 minutes</span></div>
+                            <div class="detail-row"><span class="detail-label"><i class="far fa-sun"></i> Best Time:</span><span class="detail-value">Before sleep</span></div>
+                            <div class="detail-row"><span class="detail-label"><i class="fas fa-calendar-alt"></i> Frequency:</span><span class="detail-value">Nightly</span></div>
+                        </div>
+                        <div class="asana-benefits">
+                            <h5 class="benefits-title"><i class="fas fa-heartbeat"></i> Therapeutic Benefits:</h5>
+                            <ul class="benefits-list">
+                                <li>Reduces anxiety</li>
+                                <li>Opens hips and chest</li>
+                                <li>Helps with restful sleep</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Bhramari Pranayama -->
+                <div class="asana-card">
+                    <img src="https://www.yogajournal.com/wp-content/uploads/2021/09/Bhramari-Pranayama.jpg" alt="Bhramari Pranayama" class="asana-img">
+                    <div class="asana-content">
+                        <h4 class="asana-title"><i class="fas fa-spa"></i> Bhramari Pranayama (Humming Bee Breath)</h4>
+                        <div class="asana-details">
+                            <div class="detail-row"><span class="detail-label"><i class="far fa-clock"></i> Duration:</span><span class="detail-value">3–5 minutes</span></div>
+                            <div class="detail-row"><span class="detail-label"><i class="far fa-sun"></i> Best Time:</span><span class="detail-value">Before sleep</span></div>
+                            <div class="detail-row"><span class="detail-label"><i class="fas fa-calendar-alt"></i> Frequency:</span><span class="detail-value">Daily</span></div>
+                        </div>
+                        <div class="asana-benefits">
+                            <h5 class="benefits-title"><i class="fas fa-heartbeat"></i> Therapeutic Benefits:</h5>
+                            <ul class="benefits-list">
+                                <li>Relieves insomnia</li>
+                                <li>Soothes the brain</li>
+                                <li>Improves mental clarity</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--Respiratory Health-->   
+<div class="asanas-container" id="respiratory">
+    <h3 class="asanas-header">Yoga for Respiratory Health</h3>
+    <p class="asanas-description">These practices strengthen the lungs, improve breathing, and help clear the respiratory tract.</p>
+    <div class="asana-grid">
+        <!-- Anulom Vilom -->
+        <div class="asana-card">
+            <img src="https://www.yogajournal.com/wp-content/uploads/2021/09/AnulomVilom.jpg" alt="Anulom Vilom" class="asana-img">
+            <div class="asana-content">
+                <h4 class="asana-title"><i class="fas fa-spa"></i> Anulom Vilom (Alternate Nostril Breathing)</h4>
+                <div class="asana-details">
+                    <div class="detail-row"><span class="detail-label"><i class="far fa-clock"></i> Duration:</span><span class="detail-value">5–10 minutes</span></div>
+                    <div class="detail-row"><span class="detail-label"><i class="far fa-sun"></i> Best Time:</span><span class="detail-value">Morning or evening</span></div>
+                    <div class="detail-row"><span class="detail-label"><i class="fas fa-calendar-alt"></i> Frequency:</span><span class="detail-value">Daily</span></div>
+                </div>
+                <div class="asana-benefits">
+                    <h5 class="benefits-title"><i class="fas fa-heartbeat"></i> Therapeutic Benefits:</h5>
+                    <ul class="benefits-list">
+                        <li>Enhances lung capacity</li>
+                        <li>Clears nasal passages</li>
+                        <li>Balances oxygen flow</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dhanurasana -->
+        <div class="asana-card">
+            <img src="https://www.yogajournal.com/wp-content/uploads/2021/09/Dhanurasana.jpg" alt="Dhanurasana" class="asana-img">
+            <div class="asana-content">
+                <h4 class="asana-title"><i class="fas fa-spa"></i> Dhanurasana (Bow Pose)</h4>
+                <div class="asana-details">
+                    <div class="detail-row"><span class="detail-label"><i class="far fa-clock"></i> Duration:</span><span class="detail-value">20–30 seconds</span></div>
+                    <div class="detail-row"><span class="detail-label"><i class="far fa-sun"></i> Best Time:</span><span class="detail-value">Morning on empty stomach</span></div>
+                    <div class="detail-row"><span class="detail-label"><i class="fas fa-calendar-alt"></i> Frequency:</span><span class="detail-value">3–5 times/week</span></div>
+                </div>
+                <div class="asana-benefits">
+                    <h5 class="benefits-title"><i class="fas fa-heartbeat"></i> Therapeutic Benefits:</h5>
+                    <ul class="benefits-list">
+                        <li>Expands chest</li>
+                        <li>Improves respiratory efficiency</li>
+                        <li>Strengthens lungs and diaphragm</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Matsyasana -->
+        <div class="asana-card">
+            <img src="https://www.yogajournal.com/wp-content/uploads/2021/09/Matsyasana.jpg" alt="Matsyasana" class="asana-img">
+            <div class="asana-content">
+                <h4 class="asana-title"><i class="fas fa-spa"></i> Matsyasana (Fish Pose)</h4>
+                <div class="asana-details">
+                    <div class="detail-row"><span class="detail-label"><i class="far fa-clock"></i> Duration:</span><span class="detail-value">30–60 seconds</span></div>
+                    <div class="detail-row"><span class="detail-label"><i class="far fa-sun"></i> Best Time:</span><span class="detail-value">Morning or evening</span></div>
+                    <div class="detail-row"><span class="detail-label"><i class="fas fa-calendar-alt"></i> Frequency:</span><span class="detail-value">3–4 times/week</span></div>
+                </div>
+                <div class="asana-benefits">
+                    <h5 class="benefits-title"><i class="fas fa-heartbeat"></i> Therapeutic Benefits:</h5>
+                    <ul class="benefits-list">
+                        <li>Opens lungs and chest</li>
+                        <li>Improves breathing</li>
+                        <li>Relieves respiratory congestion</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Hypertention-->
+<div class="asanas-container" id="hypertension">
+    <h3 class="asanas-header">Yoga for Hypertension</h3>
+    <p class="asanas-description">These calming poses help regulate blood pressure by reducing stress and improving circulation.</p>
+    <div class="asana-grid">
+        <!-- Viparita Karani -->
+        <div class="asana-card">
+            <img src="https://www.yogajournal.com/wp-content/uploads/2021/09/ViparitaKarani.jpg" alt="Viparita Karani" class="asana-img">
+            <div class="asana-content">
+                <h4 class="asana-title"><i class="fas fa-spa"></i> Viparita Karani (Legs-Up-the-Wall Pose)</h4>
+                <div class="asana-details">
+                    <div class="detail-row"><span class="detail-label"><i class="far fa-clock"></i> Duration:</span><span class="detail-value">5–15 minutes</span></div>
+                    <div class="detail-row"><span class="detail-label"><i class="far fa-sun"></i> Best Time:</span><span class="detail-value">Anytime (especially before bed)</span></div>
+                    <div class="detail-row"><span class="detail-label"><i class="fas fa-calendar-alt"></i> Frequency:</span><span class="detail-value">Daily</span></div>
+                </div>
+                <div class="asana-benefits">
+                    <h5 class="benefits-title"><i class="fas fa-heartbeat"></i> Therapeutic Benefits:</h5>
+                    <ul class="benefits-list">
+                        <li>Lowers blood pressure</li>
+                        <li>Calms the heart</li>
+                        <li>Relieves stress</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sukhasana with Deep Breathing -->
+        <div class="asana-card">
+            <img src="https://www.yogajournal.com/wp-content/uploads/2021/09/Sukhasana.jpg" alt="Sukhasana" class="asana-img">
+            <div class="asana-content">
+                <h4 class="asana-title"><i class="fas fa-spa"></i> Sukhasana (Easy Pose) with Deep Breathing</h4>
+                <div class="asana-details">
+                    <div class="detail-row"><span class="detail-label"><i class="far fa-clock"></i> Duration:</span><span class="detail-value">10 minutes</span></div>
+                    <div class="detail-row"><span class="detail-label"><i class="far fa-sun"></i> Best Time:</span><span class="detail-value">Morning or evening</span></div>
+                    <div class="detail-row"><span class="detail-label"><i class="fas fa-calendar-alt"></i> Frequency:</span><span class="detail-value">Daily</span></div>
+                </div>
+                <div class="asana-benefits">
+                    <h5 class="benefits-title"><i class="fas fa-heartbeat"></i> Therapeutic Benefits:</h5>
+                    <ul class="benefits-list">
+                        <li>Reduces anxiety</li>
+                        <li>Balances heart rate</li>
+                        <li>Improves mental clarity</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shavasana -->
+        <div class="asana-card">
+            <img src="https://www.yogajournal.com/wp-content/uploads/2021/09/Savasana_Andrew-Clark_0185.jpg" alt="Shavasana" class="asana-img">
+            <div class="asana-content">
+                <h4 class="asana-title"><i class="fas fa-spa"></i> Shavasana (Corpse Pose)</h4>
+                <div class="asana-details">
+                    <div class="detail-row"><span class="detail-label"><i class="far fa-clock"></i> Duration:</span><span class="detail-value">5–10 minutes</span></div>
+                    <div class="detail-row"><span class="detail-label"><i class="far fa-sun"></i> Best Time:</span><span class="detail-value">After yoga session or before bed</span></div>
+                    <div class="detail-row"><span class="detail-label"><i class="fas fa-calendar-alt"></i> Frequency:</span><span class="detail-value">Daily</span></div>
+                </div>
+                <div class="asana-benefits">
+                    <h5 class="benefits-title"><i class="fas fa-heartbeat"></i> Therapeutic Benefits:</h5>
+                    <ul class="benefits-list">
+                        <li>Lowers stress hormones</li>
+                        <li>Calms mind and body</li>
+                        <li>Regulates blood pressure</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Diabetes Management-->
+<div class="asanas-container" id="diabetes">
+    <h3 class="asanas-header">Yoga for Diabetes Management</h3>
+    <p class="asanas-description">These poses help regulate blood sugar levels and stimulate organs associated with metabolism.</p>
+    <div class="asana-grid">
+        <!-- Mandukasana -->
+        <div class="asana-card">
+            <img src="https://www.yogajournal.com/wp-content/uploads/2021/09/Mandukasana.jpg" alt="Mandukasana" class="asana-img">
+            <div class="asana-content">
+                <h4 class="asana-title"><i class="fas fa-spa"></i> Mandukasana (Frog Pose)</h4>
+                <div class="asana-details">
+                    <div class="detail-row"><span class="detail-label"><i class="far fa-clock"></i> Duration:</span><span class="detail-value">30–60 seconds</span></div>
+                    <div class="detail-row"><span class="detail-label"><i class="far fa-sun"></i> Best Time:</span><span class="detail-value">Morning or before meals</span></div>
+                    <div class="detail-row"><span class="detail-label"><i class="fas fa-calendar-alt"></i> Frequency:</span><span class="detail-value">5 times/week</span></div>
+                </div>
+                <div class="asana-benefits">
+                    <h5 class="benefits-title"><i class="fas fa-heartbeat"></i> Therapeutic Benefits:</h5>
+                    <ul class="benefits-list">
+                        <li>Stimulates pancreas</li>
+                        <li>Controls blood sugar</li>
+                        <li>Improves digestion</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Paschimottanasana -->
+        <div class="asana-card">
+            <img src="https://www.yogajournal.com/wp-content/uploads/2021/09/Paschimottanasana.jpg" alt="Paschimottanasana" class="asana-img">
+            <div class="asana-content">
+                <h4 class="asana-title"><i class="fas fa-spa"></i> Paschimottanasana (Seated Forward Bend)</h4>
+                <div class="asana-details">
+                    <div class="detail-row"><span class="detail-label"><i class="far fa-clock"></i> Duration:</span><span class="detail-value">30 seconds</span></div>
+                    <div class="detail-row"><span class="detail-label"><i class="far fa-sun"></i> Best Time:</span><span class="detail-value">Empty stomach</span></div>
+                    <div class="detail-row"><span class="detail-label"><i class="fas fa-calendar-alt"></i> Frequency:</span><span class="detail-value">4 times/week</span></div>
+                </div>
+                <div class="asana-benefits">
+                    <h5 class="benefits-title"><i class="fas fa-heartbeat"></i> Therapeutic Benefits:</h5>
+                    <ul class="benefits-list">
+                        <li>Stimulates kidneys and liver</li>
+                        <li>Improves insulin sensitivity</li>
+                        <li>Reduces stress</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ardha Matsyendrasana -->
+        <div class="asana-card">
+            <img src="https://www.yogajournal.com/wp-content/uploads/2021/09/Ardha-Matsyendrasana_Andrew-Clark_2929.jpg" alt="Ardha Matsyendrasana" class="asana-img">
+            <div class="asana-content">
+                <h4 class="asana-title"><i class="fas fa-spa"></i> Ardha Matsyendrasana (Half Lord of the Fishes)</h4>
+                <div class="asana-details">
+                    <div class="detail-row"><span class="detail-label"><i class="far fa-clock"></i> Duration:</span><span class="detail-value">30 seconds per side</span></div>
+                    <div class="detail-row"><span class="detail-label"><i class="far fa-sun"></i> Best Time:</span><span class="detail-value">Before meals</span></div>
+                    <div class="detail-row"><span class="detail-label"><i class="fas fa-calendar-alt"></i> Frequency:</span><span class="detail-value">3–4 times/week</span></div>
+                </div>
+                <div class="asana-benefits">
+                    <h5 class="benefits-title"><i class="fas fa-heartbeat"></i> Therapeutic Benefits:</h5>
+                    <ul class="benefits-list">
+                        <li>Stimulates pancreas and liver</li>
+                        <li>Improves metabolism</li>
+                        <li>Supports glucose control</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Weight Management-->
+<div class="asanas-container" id="weight-loss">
+    <h3 class="asanas-header">Yoga for Weight Management</h3>
+    <p class="asanas-description">These dynamic yoga poses activate metabolism and promote fat burning when practiced consistently.</p>
+    <div class="asana-grid">
+        <!-- Surya Namaskar -->
+        <div class="asana-card">
+            <img src="https://www.yogajournal.com/wp-content/uploads/2021/09/SuryaNamaskar.jpg" alt="Surya Namaskar" class="asana-img">
+            <div class="asana-content">
+                <h4 class="asana-title"><i class="fas fa-spa"></i> Surya Namaskar (Sun Salutations)</h4>
+                <div class="asana-details">
+                    <div class="detail-row"><span class="detail-label"><i class="far fa-clock"></i> Duration:</span><span class="detail-value">5–12 rounds</span></div>
+                    <div class="detail-row"><span class="detail-label"><i class="far fa-sun"></i> Best Time:</span><span class="detail-value">Morning</span></div>
+                    <div class="detail-row"><span class="detail-label"><i class="fas fa-calendar-alt"></i> Frequency:</span><span class="detail-value">Daily</span></div>
+                </div>
+                <div class="asana-benefits">
+                    <h5 class="benefits-title"><i class="fas fa-heartbeat"></i> Therapeutic Benefits:</h5>
+                    <ul class="benefits-list">
+                        <li>Full-body workout</li>
+                        <li>Burns calories</li>
+                        <li>Boosts metabolism</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Utkatasana -->
+        <div class="asana-card">
+            <img src="https://www.yogajournal.com/wp-content/uploads/2021/09/Utkatasana.jpg" alt="Utkatasana" class="asana-img">
+            <div class="asana-content">
+                <h4 class="asana-title"><i class="fas fa-spa"></i> Utkatasana (Chair Pose)</h4>
+                <div class="asana-details">
+                    <div class="detail-row"><span class="detail-label"><i class="far fa-clock"></i> Duration:</span><span class="detail-value">30 seconds to 1 minute</span></div>
+                    <div class="detail-row"><span class="detail-label"><i class="far fa-sun"></i> Best Time:</span><span class="detail-value">Morning</span></div>
+                    <div class="detail-row"><span class="detail-label"><i class="fas fa-calendar-alt"></i> Frequency:</span><span class="detail-value">3–4 times/week</span></div>
+                </div>
+                <div class="asana-benefits">
+                    <h5 class="benefits-title"><i class="fas fa-heartbeat"></i> Therapeutic Benefits:</h5>
+                    <ul class="benefits-list">
+                        <li>Strengthens legs and core</li>
+                        <li>Improves endurance</li>
+                        <li>Burns fat</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navasana -->
+        <div class="asana-card">
+            <img src="https://www.yogajournal.com/wp-content/uploads/2021/09/Navasana.jpg" alt="Navasana" class="asana-img">
+            <div class="asana-content">
+                <h4 class="asana-title"><i class="fas fa-spa"></i> Navasana (Boat Pose)</h4>
+                <div class="asana-details">
+                    <div class="detail-row"><span class="detail-label"><i class="far fa-clock"></i> Duration:</span><span class="detail-value">30–60 seconds</span></div>
+                    <div class="detail-row"><span class="detail-label"><i class="far fa-sun"></i> Best Time:</span><span class="detail-value">Empty stomach</span></div>
+                    <div class="detail-row"><span class="detail-label"><i class="fas fa-calendar-alt"></i> Frequency:</span><span class="detail-value">4 times/week</span></div>
+                </div>
+                <div class="asana-benefits">
+                    <h5 class="benefits-title"><i class="fas fa-heartbeat"></i> Therapeutic Benefits:</h5>
+                    <ul class="benefits-list">
+                        <li>Burns belly fat</li>
+                        <li>Tones core muscles</li>
+                        <li>Improves digestion</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  
+    </div>
+    
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">Yoga Therapy</div>
+            <p>Ancient wisdom for modern healing</p>
+            <br><br>
+            <p class="disclaimer">Disclaimer: The information provided on this website is for educational purposes only and is not a substitute for professional medical advice. Always consult with a qualified healthcare provider before beginning any new exercise program.</p>
+        </div>
+    </footer>
+    <script>
+        // Dropdown functionality
+        document.getElementById('problemSelect').addEventListener('change', function() {
+            // Hide all asana containers first
+            document.querySelectorAll('.asanas-container').forEach(container => {
+                container.classList.remove('active');
+            });
+            
+            // Show selected container
+            const selectedValue = this.value;
+            if (selectedValue) {
+                document.getElementById(selectedValue).classList.add('active');
+                
+                // Scroll to the selected section
+                document.getElementById(selectedValue).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+        
+        // Initialize with first section visible if needed
+        // document.getElementById('back-pain').classList.add('active');
+    </script>
+   
+</body>
+</html>

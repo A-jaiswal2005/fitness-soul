@@ -1,3 +1,63 @@
+// Import Firebase modules
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+// Firebase Configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyBpguw_5fYNtpA2zW2SPZEr1utQF4YEm_s",
+    authDomain: "fitness-soul-9277b.firebaseapp.com",
+    projectId: "fitness-soul-9277b",
+    storageBucket: "fitness-soul-9277b.appspot.com",
+    messagingSenderId: "350767055636",
+    appId: "1:350767055636:web:3507670556360000000000"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth();
+
+// DOM elements
+const logoutBtn = document.getElementById('logoutBtn');
+const editProfileBtn = document.getElementById('editProfileBtn');
+
+// Handle logout
+logoutBtn.addEventListener('click', async () => {
+    try {
+        await signOut(auth);
+        window.location.href = "index.html"; // Redirect to login page
+    } catch (error) {
+        console.error("Error signing out:", error);
+        alert("Failed to log out. Please try again.");
+    }
+});
+// Load user data from Firestore
+document.getElementById('generatePlanBtn').addEventListener('click', () => {
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            const docRef = doc(db, "users", user.uid);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                const userData = docSnap.data();
+            } else {
+                alert("No user data found.");
+            }
+        } else {
+            alert("User not logged in.");
+        }
+    });
+});
+
+    // Calculate BMI
+    const weight = parseFloat(userData.weight);
+    const height = parseFloat(userData.height);
+    if (weight && height) {
+        const bmi = (weight / ((height / 100) ** 2)).toFixed(1);
+        document.getElementById('bmiValue').textContent = bmi;
+    }
+
+
 async function fetchExercisePlan() {
     try {
         document.getElementById('exerciseContent').innerHTML = "Loading...";

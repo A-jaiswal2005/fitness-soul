@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fitness Soul - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         :root {
-            --primary: #5f1ee1;
+            --primary: #5e17eb;
             --secondary: #5a0cf7;
             --light: #E8F5E9;
             --dark: #5a0cf7;
@@ -197,6 +198,103 @@
                 grid-template-columns: 1fr;
             }
         }
+        .main-nav {
+        background: linear-gradient(90deg, #34b199, #3498db);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        margin-bottom: 25px;
+    }
+    
+    .nav-list {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        padding: 0;
+        margin: 0;
+        overflow-x: auto;
+    }
+    
+    .nav-item {
+        position: relative;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 15px 20px;
+        color: rgba(255, 255, 255, 0.9);
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        min-width: 100px;
+        text-align: center;
+    }
+    
+    .nav-link i {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+    }
+    
+    .nav-item.active .nav-link {
+        color: white;
+        background-color: rgba(255, 255, 255, 0.15);
+    }
+    
+    .nav-item:hover .nav-link {
+        color: white;
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: translateY(-3px);
+    }
+    
+    .nav-item::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 3px;
+        background-color: white;
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+    }
+    
+    .nav-item.active::after,
+    .nav-item:hover::after {
+        width: 70%;
+    }
+    
+    .coming-soon-badge {
+        position: absolute;
+        top: 5px;
+        right: 2px;
+        background-color: #ff7675;
+        color: white;
+        font-size: 0.6rem;
+        padding: 2px 5px;
+        border-radius: 10px;
+        font-weight: bold;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .nav-link {
+            padding: 12px 15px;
+            min-width: 80px;
+            font-size: 0.9rem;
+        }
+        
+        .coming-soon-badge {
+            font-size: 0.5rem;
+            padding: 1px 3px;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .nav-list {
+            justify-content: flex-start;
+        }
+    }
     </style>
 </head>
 <body>
@@ -204,12 +302,54 @@
         <div class="container header-content">
             <div class="logo">Fitness Soul</div>
             <div class="user-actions">
-                <span class="username" id="headerUsername">Loading...</span>
-                <button class="btn" id="logoutBtn">Logout</button>
+                <span class="username"><a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    Profile
+                </a></span>
+                <span class="btn" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </span>
             </div>
         </div>
     </header>
-    
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="ai_gym.html" class="nav-link">
+                        <i class="fas fa-dumbbell"></i>
+                        AI Gym Plan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ai_diet.html" class="nav-link">
+                        <i class="fas fa-apple-alt"></i>
+                        AI Diet Plan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ayurveda.html" class="nav-link">
+                        <i class="fas fa-leaf"></i>
+                        Ayurvedic Tips
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="yoga.html" class="nav-link">
+                        <i class="fas fa-pray"></i>
+                        Yoga
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" id="leaderboardLink">
+                        <i class="fas fa-trophy"></i>
+                        Leaderboard
+                        <span class="coming-soon-badge">Coming Soon</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div class="container">
         <div class="dashboard">
             <div class="profile-summary">
@@ -362,7 +502,6 @@
         // Display user data in the dashboard
         function displayUserData(userData) {
             // Header
-            document.getElementById('headerUsername').textContent = userData.name || "User";
             
             // Profile Summary
             const profileName = document.getElementById('profileName');
@@ -415,6 +554,24 @@
             
             welcomeAlert.textContent = `${greeting}, ${userData.name || "fitness enthusiast"}! Your fitness journey continues.`;
         }
+        document.getElementById('leaderboardLink').addEventListener('click', function(e) {
+        e.preventDefault();
+        alert('Leaderboard feature coming soon! Stay tuned for updates.');
+    });
+    
+    // Highlight the current active tab based on the page URL
+    document.addEventListener('DOMContentLoaded', function () {
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    navLinks.forEach(link => {
+        const linkHref = link.getAttribute('href');
+        if (linkHref === currentPage) {
+            link.classList.add('active'); // or link.parentElement.classList.add('active')
+        }
+    });
+});
+
     </script>
 </body>
 </html>

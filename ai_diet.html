@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise Plan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary: #5e17eb;
+            --secondary: #5a0cf7;
+            --light: #E8F5E9;
+            --dark: #5a0cf7;
+            --text-dark: #212121;
+            --text-light: #FFFFFF;
+            --gray: #757575;
+            --light-gray: #EEEEEE;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text-dark);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: var(--text-light);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .username {
+            font-weight: 500;
+        }
+        
+        .btn {
+            background-color: var(--secondary);
+            color: var(--text-light);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--dark);
+        }
+        .alert {
+            background-color: var(--light);
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+        }
+        .main-nav {
+        background: linear-gradient(90deg, #34b199, #3498db);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        margin-bottom: 25px;
+    }
+    
+    .nav-list {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        padding: 0;
+        margin: 0;
+        overflow-x: auto;
+    }
+    
+    .nav-item {
+        position: relative;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 15px 20px;
+        color: rgba(255, 255, 255, 0.9);
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        min-width: 100px;
+        text-align: center;
+    }
+    
+    .nav-link i {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+    }
+    
+    .nav-item.active .nav-link {
+        color: white;
+        background-color: rgba(255, 255, 255, 0.15);
+    }
+    
+    .nav-item:hover .nav-link {
+        color: white;
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: translateY(-3px);
+    }
+    
+    .nav-item::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 3px;
+        background-color: white;
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+    }
+    
+    .nav-item.active::after,
+    .nav-item:hover::after {
+        width: 70%;
+    }
+    
+    .coming-soon-badge {
+        position: absolute;
+        top: 5px;
+        right: 2px;
+        background-color: #ff7675;
+        color: white;
+        font-size: 0.6rem;
+        padding: 2px 5px;
+        border-radius: 10px;
+        font-weight: bold;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .nav-link {
+            padding: 12px 15px;
+            min-width: 80px;
+            font-size: 0.9rem;
+        }
+        
+        .coming-soon-badge {
+            font-size: 0.5rem;
+            padding: 1px 3px;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .nav-list {
+            justify-content: flex-start;
+        }
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Fitness Soul</div>
+            <div class="user-actions">
+                <span class="username"><a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    Profile
+                </a></span>
+                <span class="btn" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </span>
+            </div>
+        </div>
+    </header>
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-list">
+                <li class="nav-item ">
+                    <a href="ai_gym.html" class="nav-link">
+                        <i class="fas fa-dumbbell"></i>
+                        AI Gym Plan
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="ai_diet.html" class="nav-link">
+                        <i class="fas fa-apple-alt"></i>
+                        AI Diet Plan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="ayurveda.html" class="nav-link">
+                        <i class="fas fa-leaf"></i>
+                        Ayurvedic Tips
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="yoga.html" class="nav-link">
+                        <i class="fas fa-pray"></i>
+                        Yoga
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" id="leaderboardLink">
+                        <i class="fas fa-trophy"></i>
+                        Leaderboard
+                        <span class="coming-soon-badge">Coming Soon</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Weekly Exercise Plan</h1>
+        <button id = "generatePlanBtn">Generate Plan</button>
+        <div id="diet-plan"></div>
+        </div>
+    <script type="module">
+// Import Firebase modules
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+// Firebase Configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyBpguw_5fYNtpA2zW2SPZEr1utQF4YEm_s",
+    authDomain: "fitness-soul-9277b.firebaseapp.com",
+    projectId: "fitness-soul-9277b",
+    storageBucket: "fitness-soul-9277b.appspot.com",
+    messagingSenderId: "350767055636",
+    appId: "1:350767055636:web:3507670556360000000000"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth();
+
+// DOM elements
+const logoutBtn = document.getElementById('logoutBtn');
+
+// Handle logout
+logoutBtn.addEventListener('click', async () => {
+    try {
+        await signOut(auth);
+        window.location.href = "index.html"; // Redirect to login page
+    } catch (error) {
+        console.error("Error signing out:", error);
+        alert("Failed to log out. Please try again.");
+    }
+});
+// Load user data from Firestore
+document.getElementById('generatePlanBtn').addEventListener('click', () => {
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            const docRef = doc(db, "users", user.uid);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                const userData = docSnap.data();
+                fetchWorkoutPlan(userData);
+            } else {
+                alert("No user data found.");
+            }
+        } else {
+            alert("User not logged in.");
+        }
+    });
+});
+
+    // Calculate BMI
+    const weight = parseFloat(userData.weight);
+    const height = parseFloat(userData.height);
+    if (weight && height) {
+        const bmi = (weight / ((height / 100) ** 2)).toFixed(1);
+    }
+
+
+    async function fetchWorkoutPlan(userData) {
+    try {
+        const container = document.getElementById('diet-plan');
+        container.innerHTML = "Loading plan...";
+
+        const response = await fetch('http://localhost:3000/diet-plan', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(userData)
+        });
+
+        const data = await response.json();
+        const plan = data.dietPlan;
+
+        // Clear and display description
+        container.innerHTML = `<p><strong>Description:</strong> ${plan.description}</p>`;
+
+        // Create and style table
+        const table = document.createElement('table');
+        table.style.width = '100%';
+        table.style.borderCollapse = 'collapse';
+        table.style.marginTop = '15px';
+
+        // Table Header
+        const thead = document.createElement('thead');
+        const headerRow = document.createElement('tr');
+        const headers = ['Meal', 'Items', 'Calories', 'Protein', 'Notes'];
+        headers.forEach(text => {
+            const th = document.createElement('th');
+            th.textContent = text;
+            th.style.border = '1px solid #ccc';
+            th.style.padding = '8px';
+            th.style.backgroundColor = '#f2f2f2';
+            headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        // Table Body
+        const tbody = document.createElement('tbody');
+        for (const meal in plan.meals) {
+            const mealData = plan.meals[meal];
+            const row = document.createElement('tr');
+
+            // Meal name
+            const mealCell = document.createElement('td');
+            mealCell.textContent = meal;
+            mealCell.style.border = '1px solid #ddd';
+            mealCell.style.padding = '8px';
+            row.appendChild(mealCell);
+
+            // Items list
+            const itemsCell = document.createElement('td');
+            itemsCell.innerHTML = '<ul style="margin: 0; padding-left: 20px;">' + mealData.items.map(item => `<li>${item}</li>`).join('') + '</ul>';
+            itemsCell.style.border = '1px solid #ddd';
+            itemsCell.style.padding = '8px';
+            row.appendChild(itemsCell);
+
+            // Calories
+            const calCell = document.createElement('td');
+            calCell.textContent = mealData.calories;
+            calCell.style.border = '1px solid #ddd';
+            calCell.style.padding = '8px';
+            row.appendChild(calCell);
+
+            // Protein
+            const proteinCell = document.createElement('td');
+            proteinCell.textContent = mealData.protein;
+            proteinCell.style.border = '1px solid #ddd';
+            proteinCell.style.padding = '8px';
+            row.appendChild(proteinCell);
+
+            // Notes
+            const notesCell = document.createElement('td');
+            notesCell.textContent = mealData.notes;
+            notesCell.style.border = '1px solid #ddd';
+            notesCell.style.padding = '8px';
+            row.appendChild(notesCell);
+
+            tbody.appendChild(row);
+        }
+
+        table.appendChild(tbody);
+        container.appendChild(table);
+
+        // General Tips
+        const tipsHeading = document.createElement('h3');
+        tipsHeading.textContent = 'General Tips';
+        tipsHeading.style.marginTop = '20px';
+        container.appendChild(tipsHeading);
+
+        const tipsList = document.createElement('ul');
+        plan.generalTips.split('\n').forEach(tip => {
+            const li = document.createElement('li');
+            li.textContent = tip.replace(/^\d+\.\s*/, ''); // Remove numbering
+            tipsList.appendChild(li);
+        });
+        container.appendChild(tipsList);
+
+    } catch (error) {
+        console.error("Error fetching diet plan:", error);
+        document.getElementById('diet-plan').innerHTML = "Error fetching data. Please try again later.";
+    }
+}
+
+
+
+        // Format JSON into a table
+        // const table = document.createElement('table');
+        // table.style.width = '100%';
+        // table.style.borderCollapse = 'collapse';
+
+        // // Table Header
+        // const headerRow = table.insertRow();
+        // const headers = ['Day', 'Focus', 'Exercises', 'Notes'];
+        // headers.forEach(headerText => {
+        //     const header = document.createElement('th');
+        //     header.textContent = headerText;
+        //     header.style.border = '1px solid #ddd';
+        //     header.style.padding = '8px';
+        //     header.style.textAlign = 'left';
+        //     headerRow.appendChild(header);
+        // });
+
+        // // Table Rows
+        // for (const day in data.workoutPlan.days) {
+        //     const dayData = data.workoutPlan.days[day];
+        //     const row = table.insertRow();
+
+        //     const dayCell = row.insertCell();
+        //     dayCell.textContent = day;
+        //     dayCell.style.border = '1px solid #ddd';
+        //     dayCell.style.padding = '8px';
+
+        //     const focusCell = row.insertCell();
+        //     focusCell.textContent = dayData.focus;
+        //     focusCell.style.border = '1px solid #ddd';
+        //     focusCell.style.padding = '8px';
+
+        //     const exercisesCell = row.insertCell();
+        //     exercisesCell.innerHTML = dayData.exercises.map(exercise => {
+        //         return `<div>${exercise.name} (Sets: ${exercise.sets}, Reps: ${exercise.reps}, Notes: ${exercise.notes})</div>`;
+        //     }).join('');
+        //     exercisesCell.style.border = '1px solid #ddd';
+        //     exercisesCell.style.padding = '8px';
+
+        //     const notesCell = row.insertCell();
+        //     notesCell.textContent = dayData.notes;
+        //     notesCell.style.border = '1px solid #ddd';
+        //     notesCell.style.padding = '8px';
+        // }
+
+        // document.getElementById('exerciseContent').innerHTML = ''; // Clear existing content
+        // document.getElementById('exerciseContent').appendChild(table);
+
+   
+    </script>
+</body>
+</html>
