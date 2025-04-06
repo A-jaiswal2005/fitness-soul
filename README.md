@@ -1,7 +1,7 @@
 # Fitness Soul
 **Where Modern Intelligence Meets Ancient Wisdom**
 
-![Fitness Soul Logo](link-to-your-logo-if-any)
+
 
 ## Table of Contents
 - [Overview](#overview)
@@ -116,9 +116,7 @@ We welcome contributions! To get started:
    ```bash
    git push origin feature/YourFeature
    ```
-5. Open a Pull Request.
 
-Please see our CONTRIBUTING.md for detailed guidelines.
 
 ---
 
@@ -132,8 +130,7 @@ For any inquiries or feedback, please reach out to:
 
 - **Team:** G.Force Coders
 - **University:** Dr. BR Ambedkar National Institute of Technology, India
-- **Email:** your-email@example.com
-
+- **Contributors:** Ankit Jaiswal, Kunal Kashyap, Charanjot Singh
 Stay connected as we transform wellness through the fusion of modern technology and ancient wisdom!
 
 Thank you for exploring Fitness Soul – your journey to holistic wellness starts here!
