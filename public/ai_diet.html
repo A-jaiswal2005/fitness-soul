@@ -336,7 +336,7 @@
       </div>
             
     <div class="container">
-        <h1>Today's Diet Plan</h1>
+        <h1>Weekly Diet Plan</h1>
         <p>A personalized weekly diet plan tailored to your fitness goals and dietary preferences. Crafted with Indian meals, complete with nutritional insights to keep you energized and on track.</p>
         <br>
         <input type="text" placeholder="Any Suggestion" style="width: 300px; padding: 15px; border-radius: 50px; border: 1px solid #ee1cf99c;">
@@ -360,7 +360,7 @@ import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/fi
 
 // Firebase Configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyBpguw_5fYNtpA2zW2SPZEr1utQF4YEm_s",
+    apiKey: "AIzaSyBpguw_5fYNtpA2zWxxxxxxxxxxxxxxxx",
     authDomain: "fitness-soul-9277b.firebaseapp.com",
     projectId: "fitness-soul-9277b",
     storageBucket: "fitness-soul-9277b.appspot.com",
@@ -404,13 +404,6 @@ document.getElementById('generatePlanBtn').addEventListener('click', () => {
     });
 });
 
-    // Calculate BMI
-    const weight = parseFloat(userData.weight);
-    const height = parseFloat(userData.height);
-    if (weight && height) {
-        const bmi = (weight / ((height / 100) ** 2)).toFixed(1);
-    }
-
 
     async function fetchDietPlan(userData) {
     try {
@@ -418,7 +411,7 @@ document.getElementById('generatePlanBtn').addEventListener('click', () => {
         const loader = document.getElementById('food-loader');
         loader.style.display = 'flex'; // Show loader
 
-        const response = await fetch('http://localhost:3000/diet-plan', {
+        const response = await fetch('https://fitness-soul-backend.onrender.com/diet-plan', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(userData)
@@ -431,144 +424,176 @@ document.getElementById('generatePlanBtn').addEventListener('click', () => {
         console.log("Received Diet Plan:", plan);
 
         // Clear and display description
-        container.innerHTML = `<p><strong>Description:</strong> ${plan.description}</p>`;
 
-// Add heading for today's plan
-const dayHeading = document.createElement('h2');
-dayHeading.textContent = "Today's Diet Plan";
-dayHeading.style.color = '#6a1b9a';
-dayHeading.style.marginTop = '25px';
-container.appendChild(dayHeading);
+// Add the description
+const description = document.createElement('p');
+description.innerHTML = `<strong>Description:</strong> ${plan.description}`;
+container.appendChild(description);
 
-// Create the table
-const table = document.createElement('table');
-table.style.width = '100%';
-table.style.borderCollapse = 'collapse';
-table.style.marginTop = '10px';
-table.style.boxShadow = '0 2px 8px rgba(106, 27, 154, 0.2)';
-table.style.borderRadius = '8px';
-table.style.overflow = 'hidden';
+// Function to create each day's table
+function createDayTable(day, meals) {
+    const heading = document.createElement('h2');
+    heading.textContent = day;
+    heading.style.color = '#6a1b9a';
+    heading.style.marginTop = '30px';
+    container.appendChild(heading);
 
-// Table Header
-const thead = document.createElement('thead');
-const headerRow = document.createElement('tr');
-const headers = ['Meal', 'Items', 'Calories', 'Protein', 'Notes'];
-headers.forEach(text => {
-    const th = document.createElement('th');
-    th.textContent = text;
-    th.style.border = '1px solid #ce93d8';
-    th.style.padding = '12px';
-    th.style.backgroundColor = '#ba68c8';
-    th.style.color = '#fff';
-    th.style.textAlign = 'left';
-    th.style.fontWeight = '600';
-    headerRow.appendChild(th);
-});
-thead.appendChild(headerRow);
-table.appendChild(thead);
+    const table = document.createElement('table');
+    table.style.width = '100%';
+    table.style.borderCollapse = 'collapse';
+    table.style.marginTop = '10px';
+    table.style.boxShadow = '0 2px 8px rgba(106, 27, 154, 0.2)';
+    table.style.borderRadius = '8px';
+    table.style.overflow = 'hidden';
 
-// Table Body
-const tbody = document.createElement('tbody');
-for (const meal in plan.meals) {
-    const mealData = plan.meals[meal];
-    const row = document.createElement('tr');
+    // Table Header
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    const headers = ['Meal', 'Items', 'Calories', 'Protein', 'Notes'];
+    headers.forEach(text => {
+        const th = document.createElement('th');
+        th.textContent = text;
+        th.style.border = '1px solid #ce93d8';
+        th.style.padding = '12px';
+        th.style.backgroundColor = '#ba68c8';
+        th.style.color = '#fff';
+        th.style.textAlign = 'left';
+        th.style.fontWeight = '600';
+        headerRow.appendChild(th);
+    });
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
 
-    const mealCell = document.createElement('td');
-    mealCell.textContent = meal;
-    mealCell.style.border = '1px solid #e1bee7';
-    mealCell.style.padding = '10px';
-    mealCell.style.backgroundColor = '#f3e5f5';
-    row.appendChild(mealCell);
+    // Table Body
+    const tbody = document.createElement('tbody');
 
-    const itemsCell = document.createElement('td');
-    itemsCell.innerHTML = '<ul style="margin: 0; padding-left: 20px;">' +
-        mealData.items.map(item => {
-            if (typeof item === 'string') return `<li>${item}</li>`;
-            return `<li><strong>${item.name}</strong> (${item.quantity || ''}${item.preparation ? ', ' + item.preparation : ''}) - ${item.calories} kcal, ${item.protein} protein</li>`;
-        }).join('') +
-        '</ul>';
-    itemsCell.style.border = '1px solid #e1bee7';
-    itemsCell.style.padding = '10px';
-    itemsCell.style.backgroundColor = '#f8eafc';
-    row.appendChild(itemsCell);
+    for (const meal in meals) {
+        const mealData = meals[meal];
+        const row = document.createElement('tr');
 
-    const calCell = document.createElement('td');
-    calCell.textContent = mealData.calories;
-    calCell.style.border = '1px solid #e1bee7';
-    calCell.style.padding = '10px';
-    calCell.style.backgroundColor = '#f3e5f5';
-    row.appendChild(calCell);
+        const mealCell = document.createElement('td');
+        mealCell.textContent = meal;
+        mealCell.style.border = '1px solid #e1bee7';
+        mealCell.style.padding = '10px';
+        mealCell.style.backgroundColor = '#f3e5f5';
+        row.appendChild(mealCell);
 
-    const proteinCell = document.createElement('td');
-    proteinCell.textContent = mealData.protein;
-    proteinCell.style.border = '1px solid #e1bee7';
-    proteinCell.style.padding = '10px';
-    proteinCell.style.backgroundColor = '#f8eafc';
-    row.appendChild(proteinCell);
+        const itemsCell = document.createElement('td');
+        if (Array.isArray(mealData.items)) {
+            itemsCell.innerHTML = '<ul style="margin: 0; padding-left: 20px;">' +
+                mealData.items.map(item => {
+                    if (typeof item === 'string') return `<li>${item}</li>`;
+                    return `<li><strong>${item.name}</strong> (${item.quantity || ''}${item.preparation ? ', ' + item.preparation : ''}) - ${item.calories} kcal, ${item.protein} protein</li>`;
+                }).join('') +
+                '</ul>';
+        } else {
+            itemsCell.textContent = 'N/A';
+        }
+        itemsCell.style.border = '1px solid #e1bee7';
+        itemsCell.style.padding = '10px';
+        itemsCell.style.backgroundColor = '#f8eafc';
+        row.appendChild(itemsCell);
 
-    const notesCell = document.createElement('td');
-    notesCell.textContent = mealData.notes;
-    notesCell.style.border = '1px solid #e1bee7';
-    notesCell.style.padding = '10px';
-    notesCell.style.backgroundColor = '#f3e5f5';
-    row.appendChild(notesCell);
+        const calCell = document.createElement('td');
+        calCell.textContent = mealData.calories || 'N/A';
+        calCell.style.border = '1px solid #e1bee7';
+        calCell.style.padding = '10px';
+        calCell.style.backgroundColor = '#f3e5f5';
+        row.appendChild(calCell);
 
-    tbody.appendChild(row);
+        const proteinCell = document.createElement('td');
+        proteinCell.textContent = mealData.protein || 'N/A';
+        proteinCell.style.border = '1px solid #e1bee7';
+        proteinCell.style.padding = '10px';
+        proteinCell.style.backgroundColor = '#f8eafc';
+        row.appendChild(proteinCell);
+
+        const notesCell = document.createElement('td');
+        notesCell.textContent = mealData.notes || '—';
+        notesCell.style.border = '1px solid #e1bee7';
+        notesCell.style.padding = '10px';
+        notesCell.style.backgroundColor = '#f3e5f5';
+        row.appendChild(notesCell);
+
+        tbody.appendChild(row);
+    }
+
+    table.appendChild(tbody);
+    container.appendChild(table);
 }
-table.appendChild(tbody);
-container.appendChild(table);
 
-// General Tips Section
-const tipsHeading = document.createElement('h3');
+// Loop through the weeklyPlan object
+for (const day in plan.weeklyPlan) {
+    createDayTable(day, plan.weeklyPlan[day]);
+}
+
+const tipsHeading = document.createElement('h2');
 tipsHeading.textContent = 'General Tips';
-tipsHeading.style.color = '#8e24aa';
-tipsHeading.style.marginTop = '30px';
-tipsHeading.style.borderBottom = '2px solid #ce93d8';
-tipsHeading.style.paddingBottom = '5px';
+tipsHeading.style.color = '#4a148c';
+tipsHeading.style.marginTop = '40px';
+tipsHeading.style.textAlign = 'left'; // Make sure it's left aligned
 container.appendChild(tipsHeading);
 
-const tipsList = document.createElement('ul');
+// Use ordered list for numbered tips
+const tipsList = document.createElement('ol');
+tipsList.style.paddingLeft = '20px';
+tipsList.style.textAlign = 'left';
+tipsList.style.lineHeight = '1.6';
+
+// Split by line and format bold text
 plan.generalTips.split('\n').forEach(tip => {
     const li = document.createElement('li');
-    li.textContent = tip.replace(/^\d+\.\s*/, '');
-    li.style.marginBottom = '5px';
+    li.innerHTML = tip
+        .replace(/^\d+\.\s*/, '') // Remove starting number if present
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Apply <strong>
     tipsList.appendChild(li);
 });
+
 container.appendChild(tipsList);
+loader.style.display = 'none';
 
 
 document.getElementById('downloadCSV').addEventListener('click', () => {
-    if (!window.latestDietPlan || !window.latestDietPlan.meals) {
+    if (!window.latestDietPlan || !window.latestDietPlan.weeklyPlan) {
         alert("Diet plan not loaded yet!");
         return;
     }
-    
-    const meals = window.latestDietPlan.meals;
-    let csvContent = "Meal,Item,Quantity,Preparation,Calories,Protein,Notes\n";
-    
-    for (const meal in meals) {
-        const mealData = meals[meal];
-        const notes = mealData.notes.replace(/,/g, ';'); // escape commas in notes
-        
-        mealData.items.forEach(item => {
-            if (typeof item === 'string') {
-                csvContent += `"${meal}","${item}","","","${mealData.calories}","${mealData.protein}","${notes}"\n`;
+
+    const weeklyPlan = window.latestDietPlan.weeklyPlan;
+    let csvContent = "Day,Meal,Item,Quantity,Preparation,Calories,Protein,Notes\n";
+
+    for (const day in weeklyPlan) {
+        const meals = weeklyPlan[day];
+
+        for (const meal in meals) {
+            const mealData = meals[meal];
+            const notes = (mealData.notes || '').replace(/,/g, ';'); // Avoid breaking CSV structure
+
+            if (Array.isArray(mealData.items)) {
+                mealData.items.forEach(item => {
+                    if (typeof item === 'string') {
+                        csvContent += `"${day}","${meal}","${item}","","","${mealData.calories || ''}","${mealData.protein || ''}","${notes}"\n`;
+                    } else {
+                        csvContent += `"${day}","${meal}","${item.name}","${item.quantity || ''}","${item.preparation || ''}","${item.calories || ''}","${item.protein || ''}","${notes}"\n`;
+                    }
+                });
             } else {
-                csvContent += `"${meal}","${item.name}","${item.quantity || ''}","${item.preparation || ''}","${item.calories}","${item.protein}","${notes}"\n`;
+                csvContent += `"${day}","${meal}","","","","${mealData.calories || ''}","${mealData.protein || ''}","${notes}"\n`;
             }
-        });
+        }
     }
-    
+
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'today_diet_plan.csv';
+    a.download = 'weekly_diet_plan.csv';
     a.style.display = 'none';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
 });
+
 } catch (error) {
     console.error("Error fetching diet plan:", error);
     document.getElementById('diet-plan').innerHTML = "Error fetching data. Please try again later.";

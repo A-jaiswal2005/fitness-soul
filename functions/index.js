@@ -8,7 +8,7 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
-const GEMINI_API_KEY = "AIzaSyAxOsBusVANIFO75O-EqxK_z1ac7peyQCI"; // Use env in production
+const GEMINI_API_KEY = "AIzaSyAxOsBusVANIFO75O-Exxxxxxxxxxxxxxxxxxxx"; // Use env in production
 
 async function fetchGeminiResponse(prompt) {
     try {
@@ -20,7 +20,7 @@ async function fetchGeminiResponse(prompt) {
             {
                 headers: {
                     "Content-Type": "application/json",
-                    "x-goog-api-key": "AIzaSyAxOsBusVANIFO75O-EqxK_z1ac7peyQCI",
+                    "x-goog-api-key": "AIzaSyAxOsBusVANIFO75O-Exxxxxxxxxxxxxxxx",
                 },
             }
         );

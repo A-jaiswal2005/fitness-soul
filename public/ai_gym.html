@@ -355,7 +355,7 @@ import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/fi
 
 // Firebase Configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyBpguw_5fYNtpA2zW2SPZEr1utQF4YEm_s",
+    apiKey: "AIzaSyBpguw_5fYNtpAxxxxxxxxxxxxxxxxxxx",
     authDomain: "fitness-soul-9277b.firebaseapp.com",
     projectId: "fitness-soul-9277b",
     storageBucket: "fitness-soul-9277b.appspot.com",
@@ -403,7 +403,7 @@ document.getElementById('generatePlanBtn').addEventListener('click', () => {
         // Show loader
         document.getElementById('loader').style.display = 'flex';
 
-        const response = await fetch('http://localhost:3000/exercise-plan', {
+        const response = await fetch('https://fitness-soul-backend.onrender.com/exercise-plan', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(userData)
