@@ -130,7 +130,7 @@ For any inquiries or feedback, please reach out to:
 
 - **Team:** G.Force Coders
 - **University:** Dr. BR Ambedkar National Institute of Technology, India
-- **Contributors:** Ankit Jaiswal, Kunal Kashyap, Charanjot Singh
+- **Contributors:** Ankit Jaiswal, Kunal Kashyap, Charanjot Singh <br>
 Stay connected as we transform wellness through the fusion of modern technology and ancient wisdom!
 
 Thank you for exploring Fitness Soul – your journey to holistic wellness starts here!
