@@ -65,80 +65,74 @@
    ```bash
    git clone https://github.com/yourusername/fitness-soul.git
    cd fitness-soul
-Install Node.js dependencies:
+   ```
 
-bash
-Copy
-Edit
-npm install
-Start the Node.js server:
+2. **Install Node.js dependencies:**
+   ```bash
+   npm install
+   ```
 
-bash
-Copy
-Edit
-npm start
-This command will launch the website locally.
+3. **Start the Node.js server:**
+   ```bash
+   npm start
+   ```
+   This command will launch the website locally.
 
-Run the Flutter App:
+4. **Run the Flutter App:**
+   Navigate to the Flutter project directory (if separate) and run:
+   ```bash
+   flutter run
+   ```
+   The Flutter app will embed your website, providing a seamless interface on mobile and desktop.
 
-Navigate to the Flutter project directory (if separate) and run:
+### Deployment
+- **Web Hosting:** Deploy your Node.js app using platforms like Heroku, Netlify, or DigitalOcean.
+- **Flutter App Distribution:** Package and distribute your Flutter app for Android, iOS, or as a Progressive Web App (PWA).
 
-bash
-Copy
-Edit
-flutter run
-The Flutter app will embed your website, providing a seamless interface on mobile and desktop.
+---
 
-Deployment
-Web Hosting: Deploy your Node.js app using platforms like Heroku, Netlify, or DigitalOcean.
+## Usage
+- **User Journey:**
+  Users access Fitness Soul via the Flutter app, which loads the embedded website. They can navigate through personalized fitness routines, nutrition plans, and holistic wellness content, all while engaging with community features.
 
-Flutter App Distribution: Package and distribute your Flutter app for Android, iOS, or as a Progressive Web App (PWA).
+- **Responsive Design:**
+  The website is optimized for various devices, ensuring a consistent and intuitive user experience.
 
-Usage
-User Journey:
-Users access Fitness Soul via the Flutter app, which loads the embedded website. They can navigate through personalized fitness routines, nutrition plans, and holistic wellness content, all while engaging with community features.
+---
 
-Responsive Design:
-The website is optimized for various devices, ensuring a consistent and intuitive user experience.
-
-Contributing
+## Contributing
 We welcome contributions! To get started:
 
-Fork the repository.
-
-Create a feature branch:
-
-bash
-Copy
-Edit
-git checkout -b feature/YourFeature
-Commit your changes:
-
-bash
-Copy
-Edit
-git commit -m "Add a new feature"
-Push to your branch:
-
-bash
-Copy
-Edit
-git push origin feature/YourFeature
-Open a Pull Request.
+1. Fork the repository.
+2. Create a feature branch:
+   ```bash
+   git checkout -b feature/YourFeature
+   ```
+3. Commit your changes:
+   ```bash
+   git commit -m "Add a new feature"
+   ```
+4. Push to your branch:
+   ```bash
+   git push origin feature/YourFeature
+   ```
+5. Open a Pull Request.
 
 Please see our CONTRIBUTING.md for detailed guidelines.
 
-License
+---
+
+## License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-Contact
+---
+
+## Contact
 For any inquiries or feedback, please reach out to:
 
-Team: G.Force Coders
-
-University: Dr. BR Ambedkar National Institute of Technology, India
-
-Email: your-email@example.com
+- **Team:** G.Force Coders
+- **University:** Dr. BR Ambedkar National Institute of Technology, India
+- **Email:** your-email@example.com
 
 Stay connected as we transform wellness through the fusion of modern technology and ancient wisdom!
 
